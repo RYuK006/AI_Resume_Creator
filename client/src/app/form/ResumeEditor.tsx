@@ -4,6 +4,7 @@ import React, { useRef, useState, useCallback, useMemo } from "react";
 import styles from "./editor.module.css";
 import generatePDF from "react-to-pdf";
 import { Download, ArrowLeft, RefreshCw, Wand2, Briefcase, List, ListOrdered, Minus, Undo2, Redo2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface ResumeEditorProps {
   data: any;
@@ -161,8 +162,6 @@ export default function ResumeEditor({ data, atsScore: initialAts, improvements:
 
   const handleTemplateChange = (tmpl: TemplateName) => {
     setTemplate(tmpl);
-    // Re-analyze with new template context
-    handleReanalyze(tmpl);
   };
 
   // Fix My Resume
@@ -360,33 +359,46 @@ export default function ResumeEditor({ data, atsScore: initialAts, improvements:
       </div>
 
       {/* ===== ATS SCORE BAR ===== */}
-      {atsScore && (
-        <div className={styles.atsBarContainer}>
-          <div className={styles.atsBarHeader}>
-            <span className={styles.atsBarLabel}>ATS Score ({template.charAt(0).toUpperCase() + template.slice(1)} Template)</span>
-            <span className={styles.atsBarValue} style={{ color: getAtsColor(overallScore) }}>{overallScore}/100</span>
-          </div>
-          <div className={styles.atsBarTrack}>
-            <div className={styles.atsBarFill} style={{ width: `${overallScore}%`, background: getAtsColor(overallScore) }}>
-              {overallScore}%
+      <AnimatePresence>
+        {atsScore && (
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="w-full max-w-[960px] bg-white/95 rounded-xl shadow-md p-5 mb-4 backdrop-blur-md border border-gray-100"
+          >
+            <div className="flex justify-between items-center mb-2">
+              <span className="font-bold text-[#03045E] text-sm">ATS Score ({template.charAt(0).toUpperCase() + template.slice(1)} Template)</span>
+              <span className="font-extrabold text-2xl" style={{ color: getAtsColor(overallScore) }}>{overallScore}/100</span>
             </div>
-          </div>
-          <div className={styles.atsBarMini}>
-            <div className={styles.atsMiniItem}>
-              <span className={styles.atsMiniValue}>{atsScore.keyword_match || 0}%</span>
-              <span className={styles.atsMiniLabel}>Keywords</span>
+            <div className="w-full h-5 bg-gray-200 rounded-full overflow-hidden relative">
+              <motion.div 
+                initial={{ width: 0 }}
+                animate={{ width: `${overallScore}%` }}
+                transition={{ duration: 1, ease: "easeOut" }}
+                className="h-full rounded-full flex items-center justify-end pr-2 text-white font-bold text-xs min-w-[36px]"
+                style={{ background: getAtsColor(overallScore) }}
+              >
+                {overallScore}%
+              </motion.div>
             </div>
-            <div className={styles.atsMiniItem}>
-              <span className={styles.atsMiniValue}>{atsScore.readability || 0}</span>
-              <span className={styles.atsMiniLabel}>Readability</span>
+            <div className="flex gap-6 mt-3 flex-wrap">
+              <div className="flex flex-col items-center gap-1">
+                <span className="font-bold text-base text-[#03045E]">{atsScore.keyword_match || 0}%</span>
+                <span className="text-xs text-gray-500">Keywords</span>
+              </div>
+              <div className="flex flex-col items-center gap-1">
+                <span className="font-bold text-base text-[#03045E]">{atsScore.readability || 0}</span>
+                <span className="text-xs text-gray-500">Readability</span>
+              </div>
+              <div className="flex flex-col items-center gap-1">
+                <span className="font-bold text-base text-[#03045E]">{atsScore.formatting || 0}</span>
+                <span className="text-xs text-gray-500">Formatting</span>
+              </div>
             </div>
-            <div className={styles.atsMiniItem}>
-              <span className={styles.atsMiniValue}>{atsScore.formatting || 0}</span>
-              <span className={styles.atsMiniLabel}>Formatting</span>
-            </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ===== CONTROLS ===== */}
       <div className={styles.controls}>
@@ -419,43 +431,60 @@ export default function ResumeEditor({ data, atsScore: initialAts, improvements:
       </div>
 
       {/* ===== JOB MATCH PANEL ===== */}
-      {showJdPanel && (
-        <div className={styles.jdPanel}>
-          <div className={styles.scorePanelTitle}>🎯 Apply for this Job</div>
-          <textarea className={styles.jdTextarea} placeholder="Paste the full job description here..." value={jobDescription} onChange={(e) => setJobDescription(e.target.value)} />
-          <button className={`${styles.actionButton} ${styles.danger}`} onClick={handleJobMatch} disabled={matching}>
-            <Briefcase size={14} /> {matching ? "Matching..." : "Match & Optimize Resume"}
-          </button>
-          {matchResult && (
-            <div style={{ marginTop: "1rem" }}>
-              <div className={styles.matchScoreBar}>
-                <span className={styles.matchScoreValue} style={{ color: getAtsColor(matchResult.matchScore) }}>{matchResult.matchScore}%</span>
-                <span style={{ fontWeight: 600, color: "#666" }}>Job Match Score</span>
-              </div>
-              {matchResult.missingKeywords?.length > 0 && (
-                <div style={{ marginTop: "0.75rem" }}>
-                  <strong style={{ color: "var(--color-navy)", fontSize: "0.9rem" }}>Missing Keywords (click to add):</strong>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem", marginTop: "0.5rem" }}>
-                    {matchResult.missingKeywords.map((kw: string, i: number) => (
-                      <span key={i} className={styles.keywordChip} onClick={() => addKeywordToResume(kw)}>+ {kw}</span>
-                    ))}
+      <AnimatePresence>
+        {showJdPanel && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="w-full max-w-[960px] overflow-hidden"
+          >
+            <div className="bg-white/95 rounded-xl shadow-md p-5 mb-4 backdrop-blur-md border border-gray-100">
+              <div className="font-bold text-[#03045E] text-lg mb-3">🎯 Apply for this Job</div>
+              <textarea 
+                className="w-full min-h-[100px] p-3 border border-gray-300 rounded-lg text-sm mb-3 focus:outline-none focus:border-[#0077B6] focus:ring-1 focus:ring-[#0077B6] resize-y" 
+                placeholder="Paste the full job description here..." 
+                value={jobDescription} 
+                onChange={(e) => setJobDescription(e.target.value)} 
+              />
+              <button className={`${styles.actionButton} ${styles.danger}`} onClick={handleJobMatch} disabled={matching}>
+                <Briefcase size={14} /> {matching ? "Matching..." : "Match & Optimize Resume"}
+              </button>
+              
+              {matchResult && (
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-4 border-t border-gray-100 pt-4">
+                  <div className="flex items-center gap-4">
+                    <span className="text-3xl font-extrabold" style={{ color: getAtsColor(matchResult.matchScore) }}>{matchResult.matchScore}%</span>
+                    <span className="font-semibold text-gray-600">Job Match Score</span>
                   </div>
-                </div>
-              )}
-              {matchResult.addedKeywords?.length > 0 && (
-                <div style={{ marginTop: "0.75rem" }}>
-                  <strong style={{ color: "#065f46", fontSize: "0.9rem" }}>Already Present:</strong>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem", marginTop: "0.5rem" }}>
-                    {matchResult.addedKeywords.map((kw: string, i: number) => (
-                      <span key={i} style={{ background: "#dcfce7", color: "#065f46", padding: "0.2rem 0.6rem", borderRadius: "6px", fontSize: "0.8rem" }}>✓ {kw}</span>
-                    ))}
-                  </div>
-                </div>
+                  
+                  {matchResult.missingKeywords?.length > 0 && (
+                    <div className="mt-4">
+                      <strong className="text-[#03045E] text-sm">Missing Keywords <span className="font-normal text-gray-500">(click to add)</span>:</strong>
+                      <div className="flex flex-wrap gap-2 mt-2">
+                        {matchResult.missingKeywords.map((kw: string, i: number) => (
+                          <motion.span whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} key={i} className={styles.keywordChip} onClick={() => addKeywordToResume(kw)}>+ {kw}</motion.span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  
+                  {matchResult.addedKeywords?.length > 0 && (
+                    <div className="mt-4">
+                      <strong className="text-emerald-800 text-sm">Already Present:</strong>
+                      <div className="flex flex-wrap gap-2 mt-2">
+                        {matchResult.addedKeywords.map((kw: string, i: number) => (
+                          <span key={i} className="bg-green-100 text-green-800 px-3 py-1 rounded-md text-xs font-medium">✓ {kw}</span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </motion.div>
               )}
             </div>
-          )}
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ===== A4 PAGE — SINGLE EDITABLE DOCUMENT (WORD-STYLE) ===== */}
       <div
@@ -469,63 +498,78 @@ export default function ResumeEditor({ data, atsScore: initialAts, improvements:
       />
 
       {/* ===== ANALYSIS PANELS ===== */}
-      {atsScore?.missing_keywords?.length > 0 && (
-        <div className={styles.scorePanel}>
-          <div className={styles.scorePanelTitle}>🔑 Missing Keywords <span style={{ fontSize: "0.75rem", color: "#888", fontWeight: 400 }}>(click to add)</span></div>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem" }}>
-            {atsScore.missing_keywords.map((kw: string, i: number) => (
-              <span key={i} className={styles.keywordChip} onClick={() => addKeywordToResume(kw)}>+ {kw}</span>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {atsScore?.weak_bullets?.length > 0 && (
-        <div className={styles.scorePanel}>
-          <div className={styles.scorePanelTitle}>⚠️ Weak Bullet Points</div>
-          {atsScore.weak_bullets.map((wb: string, i: number) => (
-            <div key={i} className={styles.weakBullet}>{wb}</div>
-          ))}
-        </div>
-      )}
-
-      {atsScore?.sections_to_improve?.length > 0 && (
-        <div className={styles.scorePanel}>
-          <div className={styles.scorePanelTitle}>📋 Sections to Improve <span style={{ fontSize: "0.75rem", color: "#888", fontWeight: 400 }}>(click to add)</span></div>
-          {atsScore.sections_to_improve.map((s: string, i: number) => (
-            <div key={i} className={styles.suggestionItem} onClick={() => applySuggestion(s)}>
-              <span>{s}</span>
-              <span className={styles.addBadge}>+ ADD</span>
+      <div className="w-full max-w-[960px] grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+        
+        {atsScore?.missing_keywords?.length > 0 && (
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-white/95 rounded-xl shadow p-5 border border-gray-100">
+            <div className="font-bold text-[#03045E] mb-3">🔑 Missing Keywords <span className="text-xs text-gray-500 font-normal">(click to add)</span></div>
+            <div className="flex flex-wrap gap-2">
+              {atsScore.missing_keywords.map((kw: string, i: number) => (
+                <motion.span whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} key={i} className={styles.keywordChip} onClick={() => addKeywordToResume(kw)}>+ {kw}</motion.span>
+              ))}
             </div>
-          ))}
-        </div>
-      )}
+          </motion.div>
+        )}
+
+        {atsScore?.weak_bullets?.length > 0 && (
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-white/95 rounded-xl shadow p-5 border border-gray-100">
+            <div className="font-bold text-[#03045E] mb-3">⚠️ Weak Bullet Points</div>
+            {atsScore.weak_bullets.map((wb: string, i: number) => (
+              <div key={i} className={styles.weakBullet}>{wb}</div>
+            ))}
+          </motion.div>
+        )}
+
+        {atsScore?.sections_to_improve?.length > 0 && (
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-white/95 rounded-xl shadow p-5 border border-gray-100">
+            <div className="font-bold text-[#03045E] mb-3">📋 Sections to Improve <span className="text-xs text-gray-500 font-normal">(click to add)</span></div>
+            {atsScore.sections_to_improve.map((s: string, i: number) => (
+              <motion.div whileHover={{ x: 4 }} key={i} className={styles.suggestionItem} onClick={() => applySuggestion(s)}>
+                <span>{s}</span>
+                <span className={styles.addBadge}>+ ADD</span>
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
+
+        {suggestions?.length > 0 && (
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-white/95 rounded-xl shadow p-5 border border-gray-100">
+            <div className="font-bold text-[#03045E] mb-3">💡 Smart Suggestions <span className="text-xs text-gray-500 font-normal">(click to add)</span></div>
+            {suggestions.map((s: string, i: number) => (
+              <motion.div whileHover={{ x: 4 }} key={i} className={styles.suggestionItem} onClick={() => applySuggestion(s)}>
+                <span>→ {s}</span>
+                <span className={styles.addBadge}>+ ADD</span>
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
+      </div>
 
       {improvements?.length > 0 && (
-        <div className={styles.scorePanel}>
-          <div className={styles.scorePanelTitle}>🔧 AI Improvements <span style={{ fontSize: "0.75rem", color: "#888", fontWeight: 400 }}>(click to apply)</span></div>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-[960px] bg-white/95 rounded-xl shadow p-5 border border-gray-100 mt-4">
+          <div className="font-bold text-[#03045E] mb-3">🔧 AI Improvements <span className="text-xs text-gray-500 font-normal">(click to apply)</span></div>
           {improvements.map((imp: any, i: number) => (
-            <div key={i} className={styles.improvementItem} onClick={() => applyImprovement(imp)}>
+            <motion.div whileHover={{ scale: 1.01, x: 4 }} key={i} className={styles.improvementItem} onClick={() => applyImprovement(imp)}>
               <div className={styles.improvementOriginal}>❌ {imp.original}</div>
               <div className={styles.improvementFixed}>✅ {imp.improved}</div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       )}
 
-      {suggestions?.length > 0 && (
-        <div className={styles.scorePanel}>
-          <div className={styles.scorePanelTitle}>💡 Smart Suggestions <span style={{ fontSize: "0.75rem", color: "#888", fontWeight: 400 }}>(click to add)</span></div>
-          {suggestions.map((s: string, i: number) => (
-            <div key={i} className={styles.suggestionItem} onClick={() => applySuggestion(s)}>
-              <span>→ {s}</span>
-              <span className={styles.addBadge}>+ ADD</span>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {toast && <div className={styles.toast}>{toast}</div>}
+      {/* Toast using AnimatePresence */}
+      <AnimatePresence>
+        {toast && (
+          <motion.div 
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.9 }}
+            className="fixed bottom-6 right-6 bg-emerald-800 text-white px-6 py-3 rounded-xl font-semibold shadow-xl z-50"
+          >
+            {toast}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

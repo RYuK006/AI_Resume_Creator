@@ -147,6 +147,41 @@ Actionable advice cards for resume optimization
 - Fixed-position bottom-right toast for all user actions
 - Auto-dismisses after 3 seconds with slide-in/fade-out animation
 
+## Phase 8: Word-Like Editor & More Templates
+
+### 8.1 — Microsoft Word-Style Canvas
+- Converted fragmented `contentEditable` spans to a unified A4 editable root
+- Fully integrated `dangerouslySetInnerHTML` to allow raw structural edits
+- Users can now click anywhere within the A4 boundary to type seamlessly
+
+### 8.2 — Enhanced Formatting Toolbar
+- Added **Strikethrough**, **Bulleted List**, **Numbered List**, **Horizontal Rule**
+- Added **Indent**, **Outdent**, and **Full Justify**
+- Added **Highlighter Color** (Text background color picker)
+- Added **Undo** and **Redo** capabilities natively mapping to document commands
+
+### 8.3 — Advanced Template Library
+Included 4 new layouts (7 total):
+- **Executive**: Garamond, double borders, formal line height
+- **Creative**: Verdana, purple theme, side-bordered lists
+- **Professional**: Calibri, navy blue header block backgrounds
+- **Tech**: JetBrains Mono, dashed borders, code-aesthetic UI
+
+## Phase 9: Tailwind CSS & Framer Motion UI Refactor
+
+### 9.1 — Logic Fix: Template Re-Analysis
+- Stopped auto re-triggering the Gemini `/api/reanalyze` call merely upon template change
+- Ensures users don't face repeated loading latency while flipping styles, as the content remains identical
+
+### 9.2 — Tailwind UI Migration
+- Installed PostCSS and Tailwind CSS
+- Refactored hardcoded CSS side-panels (ATS Dashboard, Job Match, AI Improvements) to atomic Tailwind utilities (`w-full max-w-[960px] bg-white/95 rounded-xl shadow-md p-5 backdrop-blur-md border border-gray-100`)
+
+### 9.3 — Framer Motion Animations
+- Animated the ATS Progress Bar filling with `transition={{ duration: 1, ease: "easeOut" }}`
+- Wrapped floating panels in `AnimatePresence` for smooth layout entering/exiting
+- Added interactive hover/tap scaling to quick-action keyword chips using `whileHover` and `whileTap`
+
 ---
 
 ## Bug Fix Log
