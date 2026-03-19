@@ -14,18 +14,19 @@
   flex-wrap: wrap;
   gap: 0.35rem;
   align-items: center;
-  background: rgba(255, 255, 255, 0.97);
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.65);
+  padding: 0.4rem 1.25rem;
+  border-radius: 999px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
   z-index: 10;
   position: sticky;
-  top: 8px;
+  top: 12px;
   margin-bottom: 0.75rem;
   max-width: 960px;
   width: 100%;
-  border: 1px solid #e5e7eb;
+  border: 1px solid rgba(0,0,0,0.05);
 }
 
 .toolbarGroup {
@@ -48,9 +49,10 @@
 .toolBtn:hover { background: #e0f2fe; border-color: #bae6fd; color: #0369a1; }
 
 .toolSelect {
-  padding: 0.2rem 0.35rem; border: 1px solid #ddd;
-  border-radius: 4px; font-size: 0.75rem; background: white; cursor: pointer; color: #333;
+  padding: 0.2rem 0.35rem; border: none; outline: none;
+  border-radius: 6px; font-size: 0.75rem; background: transparent; cursor: pointer; color: #333;
 }
+.toolSelect:hover { background: rgba(0,0,0,0.04); }
 
 /* ===== CONTROLS ===== */
 .controls {
@@ -60,13 +62,13 @@
 
 .actionButton {
   display: flex; align-items: center; gap: 0.35rem;
-  padding: 0.45rem 0.85rem; background: var(--color-blue); color: white;
-  border: none; border-radius: 8px; font-weight: 600; font-size: 0.78rem;
+  padding: 0.45rem 1rem; background: var(--color-accent); color: white;
+  border: none; border-radius: 999px; font-weight: 500; font-size: 0.8rem; letter-spacing: -0.2px;
   cursor: pointer; transition: all 0.2s ease; white-space: nowrap;
 }
-.actionButton:hover { background: var(--color-navy); transform: translateY(-1px); }
-.actionButton.secondary { background: white; color: var(--color-navy); border: 1px solid var(--color-navy); }
-.actionButton.secondary:hover { background: #f0f8ff; }
+.actionButton:hover { background: #0077ed; transform: translateY(-1px); }
+.actionButton.secondary { background: white; color: var(--color-text); border: 1px solid rgba(0,0,0,0.1); }
+.actionButton.secondary:hover { background: #f5f5f7; }
 .actionButton.accent { background: #10b981; }
 .actionButton.accent:hover { background: #059669; }
 .actionButton.danger { background: #ef4444; }
@@ -79,12 +81,12 @@
 .templateSelector { display: flex; gap: 0.3rem; align-items: center; flex-wrap: wrap; }
 
 .templateBtn {
-  padding: 0.3rem 0.6rem; border: 2px solid #ddd; border-radius: 6px;
-  background: white; cursor: pointer; font-size: 0.7rem; font-weight: 600; color: #666;
+  padding: 0.3rem 0.8rem; border: 1px solid rgba(0,0,0,0.1); border-radius: 999px;
+  background: white; cursor: pointer; font-size: 0.7rem; font-weight: 500; color: #666;
   transition: all 0.2s;
 }
-.templateBtn:hover { border-color: var(--color-blue); color: var(--color-blue); }
-.templateBtn.activeTemplate { border-color: var(--color-navy); background: var(--color-navy); color: white; }
+.templateBtn:hover { border-color: #0071e3; color: #0071e3; }
+.templateBtn.activeTemplate { border-color: #0071e3; background: #0071e3; color: white; }
 
 /* ===== ATS SCORE BAR ===== */
 .atsBarContainer {
@@ -111,12 +113,12 @@
 /* ===== A4 BOARD (WORD-LIKE EDITABLE DOCUMENT) ===== */
 .a4Board {
   width: 210mm; min-height: 297mm; background: white;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.18); padding: 20mm;
+  box-shadow: 0 4px 34px rgba(0,0,0,0.06); padding: 20mm; border-radius: 6px;
   color: #333; font-family: 'Inter', 'Segoe UI', sans-serif;
   font-size: 0.95rem; line-height: 1.6;
-  outline: none; cursor: text;
+  outline: none; cursor: text; transition: box-shadow 0.3s ease;
 }
-.a4Board:focus { box-shadow: 0 8px 30px rgba(0,119,182,0.25); }
+.a4Board:focus { box-shadow: 0 12px 48px rgba(0,113,227,0.15); }
 
 /* Word-like heading/list styling inside the editable A4 */
 .a4Board h1 { font-size: 2.2rem; font-weight: 800; color: var(--color-navy); margin: 0 0 4px 0; }
@@ -173,15 +175,15 @@
 
 /* Clickable items */
 .keywordChip {
-  background: #fef2f2; color: #991b1b; padding: 0.2rem 0.6rem;
-  border-radius: 6px; font-size: 0.78rem; cursor: pointer; transition: all 0.15s;
-  display: inline-flex; align-items: center; gap: 0.25rem;
+  background: #f5f5f7; color: #333; padding: 0.25rem 0.7rem;
+  border-radius: 999px; font-size: 0.78rem; font-weight: 500; cursor: pointer; transition: all 0.15s;
+  display: inline-flex; align-items: center; gap: 0.25rem; border: 1px solid rgba(0,0,0,0.04);
 }
-.keywordChip:hover { background: #dc2626; color: white; }
+.keywordChip:hover { background: #e5e5ea; color: #1d1d1f; border-color: rgba(0,0,0,0.1); }
 
 .addBadge {
-  font-size: 0.6rem; font-weight: 700; padding: 0.12rem 0.4rem;
-  border-radius: 4px; background: var(--color-blue); color: white;
+  font-size: 0.6rem; font-weight: 600; padding: 0.15rem 0.5rem;
+  border-radius: 999px; background: #0071e3; color: white;
   opacity: 0; transition: opacity 0.15s;
 }
 
