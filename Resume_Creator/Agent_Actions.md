@@ -30,3 +30,21 @@ This file documents the steps the AI Agent has taken to construct the AI Resume 
 - Expanded the multi-step form to explicitly include a **Step 4: Document Uploads**, ready to ingest PDFs and PPTs.
 - Created `Phase4_AI_Uploads.md` within the Obsidian architecture.
 - Committed all changes to Github.
+- Handled QA from User regarding a Turbopack Next.js build error related to `pdf-parse`.
+- Replaced the ES module static import with a CommonJS `require()` resolution to fix the Next.js `Export default doesn't exist` crash.
+- Discovered that `pdf-parse` also throws a Node `DOMMatrix` Reference Error due to relying on browser APIs in Next.js backend sandboxes.
+- Removed `pdf-parse` entirely via npm and transitioned to a pure native architecture utilizing `pdfreader` and `officeparser`.
+- Updated all Form documentation to officially support `pptx` and `docx` alongside PDFs via officeparser.
+- Switched backend LLM explicitly from `gemini-1.5-flash` to universally-available `gemini-pro` after encountering a 404 model registry boundary error on the user's specific API key version.
+- Reverted to `gemini-2.5-flash` exactly per User request.
+- Verified successful Phase 4 conclusion via User's Dev Console screenshot displaying the perfectly structured JSON output `AI Resume Built: {basics: {...}, education: Array(1)...}`.
+- Initiated **Phase 5: PDF Editable Environment** setup.
+- Built `ResumeEditor.tsx` utilizing `contentEditable` and `react-to-pdf` for live manipulation.
+- Fixed a Turbopack SSR compilation crash on `fflate` inside `jspdf` by dynamically importing the editor component with `{ ssr: false }`.
+- Overhauled the AI Prompt Architecture into an "Elite Technical Recruiter" persona.
+- Re-configured Form Step 4 to allow uploading multiple individual files with attached contextual descriptions, explicitly passing that context straight to the LLM.
+- Executed local background extraction script on Aaron's actual PDF to populate a custom `Aaron_Demo_Input.md`.
+- Solved Native File Upload UI overriding visually by resetting `e.target.value` upon change in React.
+- Hardcoded the Elite FAANG Prompt System: Summaries into Array Bullets, Hard Metrics, Extracted Link Profiles arrays, Extracted Achievements arrays.
+- Expanded `ResumeEditor` to conditionally map these new Data schemas visually into the interactive DOM.
+- Deployed user's comprehensive 10-rule ATS system prompt verbatim as the new Gemini instruction set.

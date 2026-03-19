@@ -11,7 +11,7 @@ export default function Home() {
         <p className={styles.subtitle}>
           Build an incredible professional resume effortlessly. Sign in, upload your achievements, and let AI do the rest.
         </p>
-        <button className={styles.button} onClick={() => signIn("google")}>
+        <button className={styles.button} onClick={() => signIn("google", { callbackUrl: "/form" })}>
           Get Started with Google
         </button>
       </div>

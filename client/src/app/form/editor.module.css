@@ -1,0 +1,257 @@
+.editorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background: transparent;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Floating Toolbar */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(12px);
+  z-index: 10;
+  position: sticky;
+  top: 10px;
+  margin-bottom: 1rem;
+  max-width: 900px;
+  width: 100%;
+}
+
+.toolbarGroup {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  padding: 0 0.5rem;
+  border-right: 1px solid #e0e0e0;
+}
+.toolbarGroup:last-child { border-right: none; }
+
+.toolBtn {
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent; border: 1px solid transparent;
+  border-radius: 6px; cursor: pointer;
+  font-size: 0.85rem; font-weight: 700; color: #333;
+  transition: all 0.15s;
+}
+.toolBtn:hover { background: rgba(0,119,182,0.1); border-color: rgba(0,119,182,0.3); }
+
+.toolSelect {
+  padding: 0.25rem 0.5rem; border: 1px solid #ddd;
+  border-radius: 6px; font-size: 0.8rem; background: white; cursor: pointer; color: #333;
+}
+
+.toolColorInput {
+  width: 28px; height: 28px; border: none; border-radius: 4px; cursor: pointer; padding: 0;
+}
+
+/* Action Buttons Row */
+.controls {
+  display: flex; gap: 0.5rem; margin-bottom: 1rem;
+  max-width: 900px; width: 100%; flex-wrap: wrap; align-items: center;
+}
+
+.actionButton {
+  display: flex; align-items: center; gap: 0.4rem;
+  padding: 0.5rem 1rem; background: var(--color-blue); color: white;
+  border: none; border-radius: 8px; font-weight: 600; font-size: 0.8rem;
+  cursor: pointer; transition: all 0.2s ease; white-space: nowrap;
+}
+.actionButton:hover { background: var(--color-navy); transform: translateY(-1px); }
+.actionButton.secondary { background: white; color: var(--color-navy); border: 1px solid var(--color-navy); }
+.actionButton.secondary:hover { background: #f0f8ff; }
+.actionButton.accent { background: #10b981; }
+.actionButton.accent:hover { background: #059669; }
+.actionButton.danger { background: #ef4444; }
+.actionButton.danger:hover { background: #dc2626; }
+.actionButton.purple { background: #8b5cf6; }
+.actionButton.purple:hover { background: #7c3aed; }
+.actionButton:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+/* Template selector */
+.templateSelector { display: flex; gap: 0.35rem; align-items: center; }
+
+.templateBtn {
+  padding: 0.35rem 0.75rem; border: 2px solid #ddd; border-radius: 8px;
+  background: white; cursor: pointer; font-size: 0.75rem; font-weight: 600; color: #555;
+  transition: all 0.2s;
+}
+.templateBtn:hover { border-color: var(--color-blue); color: var(--color-blue); }
+.templateBtn.activeTemplate { border-color: var(--color-navy); background: var(--color-navy); color: white; }
+
+/* ===== ATS SCORE BAR ===== */
+.atsBarContainer {
+  max-width: 900px; width: 100%;
+  background: rgba(255,255,255,0.95); border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08); padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem; backdrop-filter: blur(12px);
+}
+
+.atsBarHeader {
+  display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;
+}
+
+.atsBarLabel { font-weight: 700; color: var(--color-navy); font-size: 0.95rem; }
+.atsBarValue { font-weight: 800; font-size: 1.4rem; }
+
+.atsBarTrack {
+  width: 100%; height: 24px; background: #e5e7eb; border-radius: 12px; overflow: hidden;
+  position: relative;
+}
+
+.atsBarFill {
+  height: 100%; border-radius: 12px;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1), background 0.5s ease;
+  display: flex; align-items: center; justify-content: flex-end; padding-right: 8px;
+  font-size: 0.7rem; font-weight: 700; color: white; min-width: 40px;
+}
+
+.atsBarMini {
+  display: flex; gap: 1.5rem; margin-top: 0.75rem; flex-wrap: wrap;
+}
+
+.atsMiniItem {
+  display: flex; flex-direction: column; align-items: center; gap: 0.15rem;
+}
+
+.atsMiniValue { font-weight: 700; font-size: 1rem; color: var(--color-navy); }
+.atsMiniLabel { font-size: 0.7rem; color: #888; }
+
+/* A4 Board */
+.a4Board {
+  width: 210mm; min-height: 297mm; background: white;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2); padding: 20mm;
+  display: flex; flex-direction: column; gap: 1rem; color: #333;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+/* Templates */
+.templateMinimal { font-family: 'Georgia', serif; gap: 1.25rem; }
+.templateMinimal .sectionTitle { font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid #333; color: #333; }
+.templateMinimal .name { font-size: 2rem; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; color: #333; }
+
+.templateModern { font-family: 'Inter', 'Segoe UI', sans-serif; gap: 1.25rem; }
+.templateModern .sectionTitle { font-size: 1.3rem; color: var(--color-blue); border-bottom: 2px solid var(--color-blue); }
+.templateModern .name { font-size: 2.4rem; font-weight: 800; color: var(--color-navy); }
+
+.templateFaang { font-family: 'Courier New', monospace; gap: 0.75rem; padding: 15mm; }
+.templateFaang .sectionTitle { font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #000; color: #000; padding-bottom: 0.15rem; }
+.templateFaang .name { font-size: 1.8rem; font-weight: 700; color: #000; }
+.templateFaang .bullet { font-size: 0.85rem; line-height: 1.4; }
+
+/* Resume Typography */
+.editable { outline: none; cursor: text; border-radius: 4px; transition: background 0.2s; }
+.editable:hover, .editable:focus { background: rgba(0,180,216,0.08); }
+
+.name { font-size: 2.5rem; font-weight: 800; color: var(--color-navy); margin: 0; text-align: center; }
+.contact { display: flex; justify-content: center; gap: 1.5rem; font-size: 0.9rem; color: #666; border-bottom: 2px solid var(--color-blue); padding-bottom: 0.75rem; flex-wrap: wrap; }
+.summary { font-size: 1rem; line-height: 1.6; color: #444; }
+.sectionTitle { font-size: 1.3rem; font-weight: 700; color: var(--color-navy); margin-bottom: 0.5rem; border-bottom: 1px solid #ddd; padding-bottom: 0.2rem; }
+.itemHeader { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.2rem; }
+.itemTitle { font-weight: 700; font-size: 1.05rem; }
+.itemDates { font-size: 0.85rem; color: #777; font-style: italic; }
+.itemSub { font-size: 0.95rem; font-weight: 600; color: var(--color-blue); margin-bottom: 0.35rem; }
+.bullets { margin: 0; padding-left: 1.5rem; }
+.bullet { font-size: 0.92rem; line-height: 1.5; color: #444; margin-bottom: 0.2rem; }
+.skillsContainer { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.skillPill { background: rgba(0,119,182,0.1); color: var(--color-navy); padding: 0.2rem 0.65rem; border-radius: 12px; font-size: 0.85rem; font-weight: 600; }
+
+/* Score Panel */
+.scorePanel {
+  max-width: 900px; width: 100%;
+  background: rgba(255,255,255,0.95); border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1); padding: 1.5rem;
+  margin-top: 1.5rem; backdrop-filter: blur(12px);
+}
+
+.scorePanelTitle { font-size: 1.2rem; font-weight: 700; color: var(--color-navy); margin-bottom: 0.75rem; }
+
+/* Clickable items */
+.clickableItem {
+  padding: 0.5rem 0.75rem; margin-bottom: 0.35rem; border-radius: 6px;
+  font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+.clickableItem:hover { transform: translateX(4px); }
+
+.addBadge {
+  font-size: 0.65rem; font-weight: 700; padding: 0.15rem 0.5rem;
+  border-radius: 4px; background: var(--color-blue); color: white;
+  opacity: 0; transition: opacity 0.2s;
+}
+
+.clickableItem:hover .addBadge { opacity: 1; }
+
+.keywordChip {
+  background: #fef2f2; color: #991b1b; padding: 0.2rem 0.6rem;
+  border-radius: 6px; font-size: 0.8rem; cursor: pointer; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 0.3rem;
+}
+.keywordChip:hover { background: #dc2626; color: white; }
+
+.suggestionItem {
+  padding: 0.5rem 0.75rem; margin-bottom: 0.35rem; border-radius: 6px;
+  background: rgba(16,185,129,0.1); color: #065f46; font-size: 0.85rem;
+  cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+  transition: all 0.2s;
+}
+.suggestionItem:hover { background: rgba(16,185,129,0.2); transform: translateX(4px); }
+
+.weakBullet {
+  padding: 0.5rem 0.75rem; margin-bottom: 0.35rem; border-radius: 6px;
+  background: rgba(239,68,68,0.08); color: #991b1b; font-size: 0.85rem;
+}
+
+.improvementItem {
+  padding: 0.75rem; margin-bottom: 0.5rem; border-radius: 8px;
+  background: #fef3c7; border-left: 4px solid #f59e0b;
+  cursor: pointer; transition: all 0.2s;
+}
+.improvementItem:hover { background: #fde68a; transform: translateX(4px); }
+
+.improvementOriginal { font-size: 0.82rem; color: #92400e; text-decoration: line-through; margin-bottom: 0.25rem; }
+.improvementFixed { font-size: 0.88rem; color: #065f46; font-weight: 600; }
+
+/* JD Match Panel */
+.jdPanel {
+  max-width: 900px; width: 100%;
+  background: rgba(255,255,255,0.95); border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1); padding: 1.5rem;
+  margin-top: 1.5rem; backdrop-filter: blur(12px);
+}
+
+.jdTextarea {
+  width: 100%; min-height: 120px; padding: 0.75rem; border: 1px solid #ddd;
+  border-radius: 8px; font-size: 0.9rem; font-family: inherit;
+  resize: vertical; margin-bottom: 0.75rem;
+}
+.jdTextarea:focus { outline: none; border-color: var(--color-blue); }
+
+.matchScoreBar {
+  display: flex; align-items: center; gap: 1rem; margin-top: 0.75rem;
+}
+
+.matchScoreValue { font-size: 2rem; font-weight: 800; color: var(--color-navy); }
+
+.toast {
+  position: fixed; bottom: 24px; right: 24px;
+  background: #065f46; color: white; padding: 0.75rem 1.5rem;
+  border-radius: 10px; font-weight: 600; font-size: 0.9rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  animation: slideIn 0.3s ease-out, fadeOut 0.3s ease-in 2.5s forwards;
+  z-index: 999;
+}
+
+@keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
