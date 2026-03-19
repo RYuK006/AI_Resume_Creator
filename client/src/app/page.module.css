@@ -1,0 +1,59 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  text-align: center;
+}
+
+.hero {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(3, 4, 94, 0.2);
+  transform: translateY(20px);
+  animation: slideUp 0.8s ease forwards;
+  max-width: 600px;
+}
+
+.title {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--color-navy);
+  font-weight: 800;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: var(--color-blue);
+  margin-bottom: 2rem;
+}
+
+.button {
+  background-color: var(--color-navy);
+  color: var(--color-white);
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(3, 4, 94, 0.3);
+}
+
+.button:hover {
+  background-color: var(--color-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 119, 182, 0.4);
+}
+
+@keyframes slideUp {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
