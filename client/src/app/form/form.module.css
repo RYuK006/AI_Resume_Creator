@@ -1,0 +1,119 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.wizard {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  width: 100%;
+  max-width: 700px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(3, 4, 94, 0.15);
+  padding: 3rem;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid rgba(0, 180, 216, 0.1);
+  padding-bottom: 1rem;
+}
+
+.header h2 {
+  font-size: 1.8rem;
+  color: var(--color-navy);
+  margin: 0;
+}
+
+.progress {
+  font-weight: 600;
+  color: var(--color-white);
+  background: var(--color-blue);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+}
+
+.content {
+  min-height: 300px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.formGroup label {
+  font-weight: 600;
+  color: var(--color-navy);
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.formGroup input {
+  padding: 1rem;
+  border: 1px solid rgba(0, 119, 182, 0.3);
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+  background-color: var(--color-white);
+  color: var(--color-navy);
+}
+
+.formGroup input:focus {
+  outline: none;
+  border-color: var(--color-blue);
+  box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.2);
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 119, 182, 0.1);
+}
+
+.buttonPrimary, .buttonSecondary {
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.buttonPrimary {
+  background: linear-gradient(90deg, var(--color-cyan), var(--color-blue));
+  color: var(--color-white);
+  box-shadow: 0 4px 15px rgba(0, 180, 216, 0.3);
+}
+
+.buttonPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 119, 182, 0.4);
+}
+
+.buttonSecondary {
+  background: rgba(0, 180, 216, 0.1);
+  color: var(--color-navy);
+}
+
+.buttonSecondary:hover:not(:disabled) {
+  background: rgba(0, 119, 182, 0.2);
+}
+
+.buttonSecondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

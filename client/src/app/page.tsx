@@ -1,4 +1,7 @@
+"use client";
+
 import styles from "./page.module.css";
+import { signIn } from "next-auth/react";
 
 export default function Home() {
   return (
@@ -8,7 +11,7 @@ export default function Home() {
         <p className={styles.subtitle}>
           Build an incredible professional resume effortlessly. Sign in, upload your achievements, and let AI do the rest.
         </p>
-        <button className={styles.button}>
+        <button className={styles.button} onClick={() => signIn("google")}>
           Get Started with Google
         </button>
       </div>
