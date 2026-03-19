@@ -42,7 +42,7 @@ Analyze this resume and return STRICTLY a raw JSON object:
 Do not wrap in markdown. Respond only with raw JSON.
     `;
 
-    const model = genAI.getGenerativeModel({ model: "gemini-3.0-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
     const result = await model.generateContent(prompt);
     const responseText = result.response.text();
 

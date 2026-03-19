@@ -156,7 +156,7 @@ Return STRICTLY a raw JSON object matching EXACTLY this schema (no markdown, no 
 Do not wrap it in markdown block quotes. Respond only with raw JSON.
     `;
 
-    const model = genAI.getGenerativeModel({ model: "gemini-3.0-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
     const result = await model.generateContent(prompt);
     const responseText = result.response.text();
 
