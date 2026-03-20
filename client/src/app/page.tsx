@@ -8,18 +8,20 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center bg-[#f5f5f7] px-6 text-center text-[#1d1d1f]">
       <motion.div 
-        initial={{ opacity: 0, y: 20 }} 
-        animate={{ opacity: 1, y: 0 }} 
+        initial={{ opacity: 0, scale: 0.95, y: 10 }} 
+        animate={{ opacity: 1, scale: 1, y: 0 }} 
         transition={{ duration: 0.8, ease: "easeOut" }} 
-        className="max-w-3xl flex flex-col items-center"
+        className="max-w-4xl flex flex-col items-center"
       >
-        <Image src="/logo.png" alt="AI Resume Logo" width={90} height={90} className="mb-8 rounded-3xl shadow-sm" />
+        <div className="mb-10 w-24 h-24 rounded-[28px] overflow-hidden shadow-sm bg-white flex items-center justify-center">
+          <Image src="/logo.png" alt="AI Resume Logo" width={96} height={96} className="mix-blend-multiply opacity-90" />
+        </div>
         
-        <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-4">
+        <h1 className="text-5xl md:text-[5.5rem] leading-none font-semibold tracking-[-0.03em] mb-6 text-[#1d1d1f]">
           Resume Creator AI
         </h1>
         
-        <p className="text-xl text-[#86868b] mb-10 max-w-2xl font-medium tracking-tight leading-snug">
+        <p className="text-xl md:text-2xl text-[#86868b] mb-12 max-w-[600px] font-medium tracking-tight leading-snug">
           Build an incredible professional resume effortlessly. Sign in, upload your achievements, and let the intelligence do the rest.
         </p>
         

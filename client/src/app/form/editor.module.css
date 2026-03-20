@@ -14,19 +14,19 @@
   flex-wrap: wrap;
   gap: 0.35rem;
   align-items: center;
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.75);
   padding: 0.4rem 1.25rem;
   border-radius: 999px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+  backdrop-filter: saturate(200%) blur(24px);
+  -webkit-backdrop-filter: saturate(200%) blur(24px);
   z-index: 10;
   position: sticky;
   top: 12px;
   margin-bottom: 0.75rem;
   max-width: 960px;
   width: 100%;
-  border: 1px solid rgba(0,0,0,0.05);
+  border: 1px solid rgba(255,255,255,0.6);
 }
 
 .toolbarGroup {
@@ -91,9 +91,12 @@
 /* ===== ATS SCORE BAR ===== */
 .atsBarContainer {
   max-width: 960px; width: 100%;
-  background: rgba(255,255,255,0.95); border-radius: 10px;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.08); padding: 0.75rem 1.25rem;
-  margin-bottom: 0.75rem; backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.8); border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.04); padding: 1rem 1.5rem;
+  margin-bottom: 0.75rem; 
+  backdrop-filter: saturate(200%) blur(24px);
+  -webkit-backdrop-filter: saturate(200%) blur(24px);
+  border: 1px solid rgba(255,255,255,0.6);
 }
 .atsBarHeader { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; }
 .atsBarLabel { font-weight: 700; color: var(--color-navy); font-size: 0.85rem; }
@@ -167,9 +170,12 @@
 /* ===== SCORE PANEL ===== */
 .scorePanel {
   max-width: 960px; width: 100%;
-  background: rgba(255,255,255,0.95); border-radius: 10px;
-  box-shadow: 0 3px 16px rgba(0,0,0,0.08); padding: 1.25rem;
-  margin-top: 1rem; backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.8); border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.04); padding: 1.5rem;
+  margin-top: 1rem; 
+  backdrop-filter: saturate(200%) blur(24px);
+  -webkit-backdrop-filter: saturate(200%) blur(24px);
+  border: 1px solid rgba(255,255,255,0.6);
 }
 .scorePanelTitle { font-size: 1.1rem; font-weight: 700; color: var(--color-navy); margin-bottom: 0.6rem; }
 
@@ -213,15 +219,19 @@
 /* JD Panel */
 .jdPanel {
   max-width: 960px; width: 100%;
-  background: rgba(255,255,255,0.95); border-radius: 10px;
-  box-shadow: 0 3px 16px rgba(0,0,0,0.08); padding: 1.25rem;
-  margin-bottom: 0.75rem; backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.8); border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.04); padding: 1.5rem;
+  margin-bottom: 0.75rem; 
+  backdrop-filter: saturate(200%) blur(24px);
+  -webkit-backdrop-filter: saturate(200%) blur(24px);
+  border: 1px solid rgba(255,255,255,0.6);
 }
 .jdTextarea {
-  width: 100%; min-height: 100px; padding: 0.65rem; border: 1px solid #ddd;
-  border-radius: 8px; font-size: 0.85rem; font-family: inherit; resize: vertical; margin-bottom: 0.6rem;
+  width: 100%; min-height: 120px; padding: 0.85rem; border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 12px; font-size: 0.9rem; font-family: inherit; resize: none; margin-bottom: 0.6rem;
+  background: rgba(255,255,255,0.6); transition: all 0.2s;
 }
-.jdTextarea:focus { outline: none; border-color: var(--color-blue); }
+.jdTextarea:focus { outline: none; border-color: #0071e3; box-shadow: 0 0 0 4px rgba(0,113,227,0.1); background: white; }
 .matchScoreBar { display: flex; align-items: center; gap: 1rem; margin-top: 0.5rem; }
 .matchScoreValue { font-size: 1.8rem; font-weight: 800; color: var(--color-navy); }
 
