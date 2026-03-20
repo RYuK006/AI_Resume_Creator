@@ -434,11 +434,20 @@ export default function Home() {
             <p className="text-slate-500">© 2026 Luminance AI. Crafted for precision.</p>
           </div>
           <div className="flex flex-wrap justify-center gap-8">
-            <a href="#" className="text-slate-500 hover:text-slate-900 transition-colors">Privacy Policy</a>
-            <a href="#" className="text-slate-500 hover:text-slate-900 transition-colors">Terms of Service</a>
-            <a href="#" className="text-slate-500 hover:text-slate-900 transition-colors">Contact Support</a>
-            <a href="#" className="text-slate-500 hover:text-slate-900 transition-colors">Twitter</a>
-            <a href="#" className="text-slate-500 hover:text-slate-900 transition-colors">LinkedIn</a>
+            {/* Add your Privacy Policy URL here */}
+            <a href="/privacy" className="text-slate-500 hover:text-slate-900 transition-colors">Privacy Policy</a>
+            
+            {/* Add your Terms of Service URL here */}
+            <a href="/terms" className="text-slate-500 hover:text-slate-900 transition-colors">Terms of Service</a>
+            
+            {/* Add your Support/Contact URL here */}
+            <a href="mailto:support@luminanceai.com" className="text-slate-500 hover:text-slate-900 transition-colors">Contact Support</a>
+            
+            {/* Add your X (Twitter) profile URL here */}
+            <a href="https://x.com/yourusername" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-slate-900 transition-colors">Twitter</a>
+            
+            {/* Add your LinkedIn profile URL here */}
+            <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-slate-900 transition-colors">LinkedIn</a>
           </div>
         </div>
       </footer>

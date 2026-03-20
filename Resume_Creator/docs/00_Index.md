@@ -62,7 +62,32 @@ npm run dev
 | Icons | Material Symbols | Google CDN |
 | PDF Export | react-to-pdf | 3.2.2 |
 
-See [[01_Project_Overview]] for full details.
+## Project History & Development Phases
+
+The project evolved through **18 distinct phases** of iterative development and refinement:
+
+| Phase | Milestone | Focus Area |
+|-------|-----------|------------|
+| 1 | [[Phase_01_Initialization\|Initialization]] | Next.js, Tailwind v4, Basic Structure |
+| 2 | [[Phase_02_Authentication\|Authentication]] | NextAuth, Google OAuth Integration |
+| 3 | [[Phase_03_Form_Wizard\|Form Wizard]] | Multi-step user data collection |
+| 4 | [[Phase_04_AI_Integration\|AI Integration]] | Gemini 1.5 Pro, structured generation |
+| 5 | [[Phase_05_Resume_Editor\|Resume Editor]] | A4 Live Editor, PDF Export |
+| 6 | [[Phase_06_ATS_Scoring\|ATS Scoring]] | Keyword analysis, optimize score |
+| 7 | [[Phase_07_UX_Audit\|UX Audit]] | Visibility and contrast refinements |
+| 8 | [[Phase_08_Stitch_Integration\|Stitch Design]] | Etheric Ledger System, Premium UI |
+| 9 | [[Phase_09_Premium_Wizard\|Premium Wizard]] | Redesigned multi-step form flow |
+| 10 | [[Phase_10_Landing_Page_Redesign\|Landing Page]] | Asymmetric Hero, trust elements |
+| 11 | [[Phase_11_Mobile_Responsiveness\|Responsive UI]] | Mobile menus, touch optimization |
+| 12 | [[Phase_12_Android_Port_Planning\|Android Planning]] | Capacitor/Cordova build research |
+| 13 | [[Phase_13_Iconography_Theming\|Theming]] | Material Symbols, Brand scaling |
+| 14 | [[Phase_14_Persistence_Layer\|Persistence]] | localStorage-based storage engine |
+| 15 | [[Phase_15_Dashboard_Foundation\|Dashboard v1]] | Sidebar layout, Canva-style base |
+| 16 | [[Phase_16_Dashboard_Refinement\|Dashboard v2]] | High-quality assets, grid layouts |
+| 17 | [[Phase_17_Pricing_Templates\|Pricing & CTAs]] | Monetization, Template shortcuts |
+| 18 | [[Phase_18_Interactivity_Documentation\|Brain Overhaul]] | Interactivity, Detailed Docs |
+
+See [[Phase_18_Interactivity_Documentation]] for the most recent changes.
 
 ---
 
