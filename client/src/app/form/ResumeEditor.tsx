@@ -11,6 +11,7 @@ interface ResumeEditorProps {
   atsScore?: any;
   improvements?: any[];
   suggestions?: string[];
+  initialTemplate?: string;
   onBack: () => void;
 }
 
@@ -92,9 +93,9 @@ function buildResumeHTML(data: any): string {
 
 type TemplateName = "modern" | "minimal" | "faang" | "executive" | "creative" | "professional" | "tech";
 
-export default function ResumeEditor({ data, atsScore: initialAts, improvements: initialImprovements, suggestions: initialSuggestions, onBack }: ResumeEditorProps) {
+export default function ResumeEditor({ data, atsScore: initialAts, improvements: initialImprovements, suggestions: initialSuggestions, initialTemplate, onBack }: ResumeEditorProps) {
   const targetRef = useRef<HTMLDivElement>(null);
-  const [template, setTemplate] = useState<TemplateName>("modern");
+  const [template, setTemplate] = useState<TemplateName>((initialTemplate as TemplateName) || "modern");
   const [reanalyzing, setReanalyzing] = useState(false);
   const [fixing, setFixing] = useState(false);
   const [atsScore, setAtsScore] = useState(initialAts || null);

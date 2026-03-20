@@ -1,11 +1,86 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import styles from "./form.module.css";
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 
 const ResumeEditor = dynamic(() => import("./ResumeEditor"), { ssr: false });
+
+/* ── Example resume data for template previews ── */
+function getExampleResume() {
+  return {
+    basics: {
+      name: "Alex Thompson",
+      email: "alex.thompson@email.com",
+      profiles: ["github.com/alexthompson", "linkedin.com/in/alexthompson"],
+      summary: [
+        "Full-stack software engineer with 5+ years of experience building scalable web applications",
+        "Expert in React, TypeScript, Node.js, and cloud infrastructure (AWS, GCP)",
+        "Passionate about clean code, user experience, and delivering impactful products"
+      ]
+    },
+    education: [
+      {
+        institution: "Stanford University",
+        area: "Computer Science",
+        studyType: "B.S.",
+        startDate: "2016",
+        endDate: "2020"
+      }
+    ],
+    work: [
+      {
+        company: "Stripe",
+        position: "Senior Software Engineer",
+        startDate: "Jan 2023",
+        endDate: "Present",
+        highlights: [
+          "Led the redesign of the merchant dashboard, improving user engagement by 35%",
+          "Built a real-time fraud detection pipeline processing 10M+ transactions daily",
+          "Mentored 4 junior engineers and established team code review standards"
+        ]
+      },
+      {
+        company: "Google",
+        position: "Software Engineer",
+        startDate: "Jul 2020",
+        endDate: "Dec 2022",
+        highlights: [
+          "Developed core features for Google Cloud Console used by 2M+ developers",
+          "Reduced page load times by 40% through code splitting and lazy loading",
+          "Contributed to an open-source design system adopted by 15 internal teams"
+        ]
+      }
+    ],
+    projects: [
+      {
+        name: "CloudSync — Real-Time Collaboration Platform",
+        description: "Built with Next.js, WebSockets, and PostgreSQL",
+        highlights: [
+          "Implemented operational transform for real-time document editing",
+          "Achieved 99.9% uptime with auto-scaling Kubernetes infrastructure",
+          "Grew to 5,000+ monthly active users within 6 months of launch"
+        ]
+      }
+    ],
+    achievements: [
+      "1st Place, Google Internal Hackathon 2022 — AI-powered accessibility tool",
+      "Published \"Scaling React Applications\" in IEEE Software Engineering Conference 2023",
+      "Open-source contributor: 500+ stars on GitHub for react-perf-toolkit"
+    ],
+    skills: [
+      "Languages: TypeScript, Python, Go, SQL",
+      "Frontend: React, Next.js, Tailwind CSS, Framer Motion",
+      "Backend: Node.js, Express, GraphQL, REST APIs",
+      "Cloud: AWS (Lambda, S3, DynamoDB), GCP, Docker, Kubernetes",
+      "Tools: Git, CI/CD, Figma, Jira"
+    ]
+  };
+}
+
+
 
 /* Material Symbols helper */
 const Icon = ({ name, fill, className = "" }: { name: string; fill?: boolean; className?: string }) => (
@@ -30,13 +105,25 @@ const fadeVariant = {
   exit: { opacity: 0, y: -12, transition: { duration: 0.25 } }
 };
 
-export default function ResumeForm() {
+export default function ResumeFormPage() {
+  return (
+    <Suspense fallback={<div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center',color:'#707883',fontFamily:'Inter'}}>Loading...</div>}>
+      <ResumeFormInner />
+    </Suspense>
+  );
+}
+
+function ResumeFormInner() {
+  const searchParams = useSearchParams();
+  const templateParam = searchParams.get("template");
+  
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [resumeData, setResumeData] = useState<any>(null);
   const [atsScore, setAtsScore] = useState<any>(null);
   const [improvements, setImprovements] = useState<any[]>([]);
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [initialTemplate, setInitialTemplate] = useState<string | null>(null);
   
   const [qualifications, setQualifications] = useState("");
   const [experiences, setExperiences] = useState("");
@@ -44,6 +131,17 @@ export default function ResumeForm() {
   const [files, setFiles] = useState<{file: File, description: string}[]>([]);
   const [dragActive, setDragActive] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // ── Template preloading: if ?template=X, auto-load editor with sample data ──
+  useEffect(() => {
+    if (templateParam && !resumeData) {
+      const validTemplates = ["modern", "minimal", "faang", "executive", "creative", "professional", "tech"];
+      if (validTemplates.includes(templateParam)) {
+        setResumeData(getExampleResume());
+        setInitialTemplate(templateParam);
+      }
+    }
+  }, [templateParam, resumeData]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -106,7 +204,8 @@ export default function ResumeForm() {
         atsScore={atsScore}
         improvements={improvements}
         suggestions={suggestions}
-        onBack={() => { setResumeData(null); setAtsScore(null); setImprovements([]); setSuggestions([]); }} 
+        initialTemplate={initialTemplate || undefined}
+        onBack={() => { setResumeData(null); setAtsScore(null); setImprovements([]); setSuggestions([]); setInitialTemplate(null); }} 
       />
     );
   }

@@ -35,7 +35,10 @@ export default function Home() {
           ═══════════════════════════════════════════════════════════════ */}
       <nav className="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl font-headline antialiased shadow-[0_8px_32px_0_rgba(0,0,0,0.04)]">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-8 py-4">
-          <div className="text-xl font-bold tracking-tight text-slate-900">Luminance AI</div>
+          <div className="flex items-center gap-2">
+            <Icon name="auto_awesome" fill className="text-primary text-2xl" />
+            <span className="font-headline font-black text-2xl tracking-tighter text-on-surface">Luminance AI</span>
+          </div>
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-8">
@@ -82,7 +85,7 @@ export default function Home() {
         {/* ═══════════════════════════════════════════════════════════════
             HERO — Two-column asymmetric layout from Stitch
             ═══════════════════════════════════════════════════════════════ */}
-        <section className="relative px-8 pt-20 pb-32">
+        <section className="relative px-8 pt-8 pb-24">
           <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
 
             {/* Left column — Copy */}
@@ -283,6 +286,110 @@ export default function Home() {
               </footer>
             </blockquote>
           </motion.div>
+        </section>
+
+        {/* ═══════════════════════════════════════════════════════════════
+            PRICING — Three-tier system
+            ═══════════════════════════════════════════════════════════════ */}
+        <section id="pricing" className="py-24 px-8 bg-surface-container-low">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}
+              className="text-center mb-16"
+            >
+              <h2 className="font-headline text-4xl font-extrabold text-on-surface mb-4">Simple, Transparent Pricing</h2>
+              <p className="text-on-surface-variant max-w-xl mx-auto">Start free. Upgrade when you need more power.</p>
+            </motion.div>
+
+            <motion.div
+              initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
+              className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto"
+            >
+              {/* ── Free Tier ── */}
+              <motion.div variants={fadeUp}
+                className="bg-surface-container-lowest rounded-2xl p-8 border border-outline-variant/15 flex flex-col"
+              >
+                <div className="mb-6">
+                  <h3 className="font-headline text-lg font-bold text-on-surface mb-1">Free</h3>
+                  <p className="text-on-surface-variant text-sm">Perfect for getting started</p>
+                </div>
+                <div className="mb-6">
+                  <span className="font-headline text-4xl font-extrabold text-on-surface">$0</span>
+                  <span className="text-on-surface-variant text-sm ml-1">/month</span>
+                </div>
+                <ul className="flex flex-col gap-3 mb-8 flex-1">
+                  {["3 AI-generated resumes", "2 templates (Modern, Minimal)", "Basic ATS scoring", "PDF export", "Community support"].map((f, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm text-on-surface-variant">
+                      <Icon name="check_circle" fill className="text-primary text-base mt-0.5 shrink-0" /> {f}
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
+                  className="w-full py-3 rounded-xl font-semibold bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-all active:scale-95"
+                >
+                  Get Started Free
+                </button>
+              </motion.div>
+
+              {/* ── Pro Tier (Popular) ── */}
+              <motion.div variants={fadeUp}
+                className="bg-surface-container-lowest rounded-2xl p-8 border-2 border-primary flex flex-col relative shadow-xl shadow-primary/10"
+              >
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 primary-gradient text-on-primary text-xs font-bold px-4 py-1 rounded-full tracking-wider uppercase">
+                  Most Popular
+                </div>
+                <div className="mb-6">
+                  <h3 className="font-headline text-lg font-bold text-on-surface mb-1">Pro</h3>
+                  <p className="text-on-surface-variant text-sm">For active job seekers</p>
+                </div>
+                <div className="mb-6">
+                  <span className="font-headline text-4xl font-extrabold text-on-surface">$12</span>
+                  <span className="text-on-surface-variant text-sm ml-1">/month</span>
+                </div>
+                <ul className="flex flex-col gap-3 mb-8 flex-1">
+                  {["Unlimited AI resumes", "All 7 templates", "Advanced ATS scoring", "Job Match optimizer", "AI auto-fix suggestions", "Priority PDF export", "Email support"].map((f, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm text-on-surface-variant">
+                      <Icon name="check_circle" fill className="text-primary text-base mt-0.5 shrink-0" /> {f}
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
+                  className="w-full py-3 rounded-xl font-bold primary-gradient text-on-primary shadow-lg shadow-primary/20 hover:shadow-xl transition-all active:scale-95"
+                >
+                  Start Pro Trial
+                </button>
+              </motion.div>
+
+              {/* ── Enterprise Tier ── */}
+              <motion.div variants={fadeUp}
+                className="bg-surface-container-lowest rounded-2xl p-8 border border-outline-variant/15 flex flex-col"
+              >
+                <div className="mb-6">
+                  <h3 className="font-headline text-lg font-bold text-on-surface mb-1">Enterprise</h3>
+                  <p className="text-on-surface-variant text-sm">For teams & recruiters</p>
+                </div>
+                <div className="mb-6">
+                  <span className="font-headline text-4xl font-extrabold text-on-surface">$29</span>
+                  <span className="text-on-surface-variant text-sm ml-1">/month</span>
+                </div>
+                <ul className="flex flex-col gap-3 mb-8 flex-1">
+                  {["Everything in Pro", "Team collaboration", "Custom branding on templates", "Bulk resume generation", "API access", "Analytics dashboard", "Dedicated account manager"].map((f, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm text-on-surface-variant">
+                      <Icon name="check_circle" fill className="text-primary text-base mt-0.5 shrink-0" /> {f}
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
+                  className="w-full py-3 rounded-xl font-semibold bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-all active:scale-95"
+                >
+                  Contact Sales
+                </button>
+              </motion.div>
+            </motion.div>
+          </div>
         </section>
 
         {/* ═══════════════════════════════════════════════════════════════

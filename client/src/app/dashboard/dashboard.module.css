@@ -103,6 +103,33 @@
   padding: 0 0.75rem;
   border-top: 1px solid rgba(191, 199, 212, 0.12);
   padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.upgradeBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0.75rem;
+  border-radius: 12px;
+  font-family: var(--font-headline);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(135deg, #db7900 0%, #904d00 100%);
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(144, 77, 0, 0.2);
+  margin-bottom: 0.5rem;
+}
+
+.upgradeBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(144, 77, 0, 0.3);
 }
 
 .signOutBtn {

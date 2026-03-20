@@ -120,6 +120,9 @@ export default function Dashboard() {
         </nav>
 
         <div className={styles.sidebarFooter}>
+          <button className={styles.upgradeBtn} onClick={() => router.push("/#pricing")}>
+            <Icon name="workspace_premium" fill className="text-lg" /> Upgrade to Pro
+          </button>
           <button className={styles.signOutBtn} onClick={() => signOut({ callbackUrl: "/" })}>
             <Icon name="logout" className="text-lg" /> Sign Out
           </button>
@@ -282,7 +285,7 @@ export default function Dashboard() {
                   key={t.id}
                   variants={fadeUp}
                   className={styles.templateCard}
-                  onClick={() => router.push("/form")}
+                  onClick={() => router.push(`/form?template=${t.id}`)}
                 >
                   <div className={styles.templatePreview} style={{ borderTopColor: t.color }}>
                     {/* Mini resume skeleton with template accent color */}
