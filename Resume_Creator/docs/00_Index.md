@@ -67,3 +67,5 @@ See [[01_Project_Overview]] for full details.
 ---
 
 *Last updated: 2026-03-20*
+
+[[Resume_Creator]]

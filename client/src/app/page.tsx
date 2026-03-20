@@ -46,7 +46,7 @@ export default function Home() {
           </div>
 
           <button
-            onClick={() => signIn("google", { callbackUrl: "/form" })}
+            onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
             className="hidden md:block primary-gradient text-on-primary px-6 py-2.5 rounded-lg font-semibold shadow-sm active:scale-95 duration-150 transition-transform"
           >
             Get Started
@@ -68,7 +68,7 @@ export default function Home() {
             <a href="#features" className="font-semibold text-on-surface py-2">Features</a>
             <a href="#pricing" className="font-semibold text-on-surface py-2">Pricing</a>
             <button
-              onClick={() => signIn("google", { callbackUrl: "/form" })}
+              onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
               className="primary-gradient text-white py-3 rounded-xl font-bold mt-2"
             >
               Get Started
@@ -116,7 +116,7 @@ export default function Home() {
               {/* CTA Buttons */}
               <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
                 <button
-                  onClick={() => signIn("google", { callbackUrl: "/form" })}
+                  onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
                   className="primary-gradient text-on-primary px-8 py-4 rounded-xl font-bold text-lg shadow-lg shadow-primary/20 active:scale-95 transition-all"
                 >
                   Get Started Now
@@ -306,7 +306,7 @@ export default function Home() {
                 Join 50,000+ professionals who have transformed their job search with Luminance AI.
               </p>
               <button
-                onClick={() => signIn("google", { callbackUrl: "/form" })}
+                onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
                 className="bg-white text-primary px-10 py-5 rounded-2xl font-bold text-xl shadow-xl hover:bg-slate-50 transition-all active:scale-95"
               >
                 Build Your Free Resume
