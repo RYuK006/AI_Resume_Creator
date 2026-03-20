@@ -71,7 +71,7 @@ export default function Home() {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0071e3] to-[#42a1ec]">gets you hired.</span>
             </motion.h1>
             
-            <motion.p variants={fadeUp} className="text-xl md:text-2xl text-[#86868b] mb-12 max-w-2xl font-medium tracking-tight leading-snug">
+            <motion.p variants={fadeUp} className="text-xl md:text-2xl text-[#424245] mb-12 max-w-2xl font-medium tracking-tight leading-snug">
               Stop guessing what recruiters want. Our AI analyzes your experience and builds an ATS-optimized, beautifully formatted resume in seconds.
             </motion.p>
             
@@ -97,7 +97,7 @@ export default function Home() {
               className="text-center mb-20"
             >
               <h2 className="text-4xl md:text-5xl font-semibold tracking-tight mb-4">Brilliant features.</h2>
-              <p className="text-xl text-[#86868b] max-w-2xl mx-auto font-medium">Everything you need to bypass the ATS screen and land the interview.</p>
+              <p className="text-xl text-[#424245] max-w-2xl mx-auto font-medium">Everything you need to bypass the ATS screen and land the interview.</p>
             </motion.div>
             
             <div className="grid md:grid-cols-3 gap-8">
@@ -112,13 +112,13 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.6, delay: i * 0.1, ease: "easeOut" as const }}
-                  className="bg-[#f5f5f7] rounded-[2rem] p-10 hover:shadow-xl transition-shadow duration-500"
+                  className="bg-[#f5f5f7] rounded-[2rem] p-8 md:p-10 hover:shadow-xl transition-shadow duration-500"
                 >
                   <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center shadow-sm mb-6">
                     {feature.icon}
                   </div>
                   <h3 className="text-2xl font-semibold tracking-tight mb-3">{feature.title}</h3>
-                  <p className="text-[#86868b] leading-relaxed font-medium">{feature.desc}</p>
+                  <p className="text-[#424245] leading-relaxed font-medium">{feature.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -132,20 +132,20 @@ export default function Home() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-semibold tracking-tight mb-4">Simple pricing.</h2>
-            <p className="text-xl text-[#86868b] font-medium">Start for free, upgrade when you need extreme AI power.</p>
+            <p className="text-xl text-[#424245] font-medium">Start for free, upgrade when you need extreme AI power.</p>
           </motion.div>
           
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Free */}
             <motion.div 
               initial={{ opacity: 0, scale: 0.95, y: 20 }} whileInView={{ opacity: 1, scale: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.5 }}
-              className="bg-white rounded-[2.5rem] p-10 lg:p-12 border border-black/[0.05] shadow-sm flex flex-col"
+              className="bg-white rounded-[2.5rem] p-8 md:p-10 lg:p-12 border border-black/[0.05] shadow-sm flex flex-col"
             >
               <h3 className="text-2xl font-semibold tracking-tight mb-2">Basic</h3>
-              <div className="text-5xl font-bold tracking-tight mb-6">$0<span className="text-xl text-[#86868b] font-medium tracking-normal">/mo</span></div>
+              <div className="text-5xl font-bold tracking-tight mb-6">$0<span className="text-xl text-[#424245] font-medium tracking-normal">/mo</span></div>
               <ul className="space-y-4 mb-10 flex-1">
                 {["1 AI Resume Generation", "Basic ATS Scoring", "Standard Export", "3 Basic Templates"].map((feature, i) => (
-                  <li key={i} className="flex items-center gap-3 text-[#1d1d1f] font-medium"><CheckCircle size={20} className="text-[#86868b]" /> {feature}</li>
+                  <li key={i} className="flex items-center gap-3 text-[#1d1d1f] font-medium"><CheckCircle size={20} className="text-[#424245]" /> {feature}</li>
                 ))}
               </ul>
               <button onClick={() => signIn("google", { callbackUrl: "/form" })} className="w-full py-4 rounded-full bg-[#f5f5f7] text-[#1d1d1f] font-semibold hover:bg-[#e5e5ea] transition-colors">Start Free</button>
@@ -154,7 +154,7 @@ export default function Home() {
             {/* Pro */}
             <motion.div 
               initial={{ opacity: 0, scale: 0.95, y: 20 }} whileInView={{ opacity: 1, scale: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-[#1d1d1f] text-white rounded-[2.5rem] p-10 lg:p-12 shadow-[0_20px_40px_rgba(0,0,0,0.2)] flex flex-col relative overflow-hidden"
+              className="bg-[#1d1d1f] text-white rounded-[2.5rem] p-8 md:p-10 lg:p-12 shadow-[0_20px_40px_rgba(0,0,0,0.2)] flex flex-col relative overflow-hidden"
             >
               <div className="absolute top-0 right-0 p-6">
                 <span className="bg-[#0071e3] text-white text-[0.65rem] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Most Popular</span>
@@ -174,7 +174,7 @@ export default function Home() {
       
       {/* Footer */}
       <footer className="py-12 border-t border-black/[0.05] bg-white text-center">
-        <p className="text-[#86868b] text-sm font-medium">© 2026 Resume Creator AI. Built with intelligence.</p>
+        <p className="text-[#424245] text-sm font-medium">© 2026 Resume Creator AI. Built with intelligence.</p>
       </footer>
     </div>
   );
