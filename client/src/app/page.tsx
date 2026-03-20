@@ -7,7 +7,7 @@ import { useState } from "react";
 /* ─── Stitch Etheric Ledger — Animation Variants ─── */
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } }
 };
 const stagger = {
   hidden: { opacity: 0 },
@@ -162,7 +162,7 @@ export default function Home() {
               <div className="glass-card p-4 rounded-2xl shadow-2xl border border-outline-variant/15 rotate-2">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyM9PLj24jnxjzZwznDQ_zOWQ_xMuSjuLuvnH5VMERp05W30KPv-S9vsHtXmzkOKT9CxfZPTcKdohMM91F3YAgyRzNNnUOuXpxaNS53T869vL_P84oSGGcMku4vibcjzZcnBeEB0fqjV9QC4yfIYyA2ayFWSMkJbqc5ADFHFxNw2wKenO1i_ipFtDNBn4BBjeVsLhTG15xC0DVzLZD6Bzp7OuXLizbhA382_QBPqajB2Ge60F5NIQGMLyhF5QdZfI7_ZjrZEllSA4"
+                  src="/hero-resume-mockup.png"
                   alt="Resume editor interface mockup"
                   className="rounded-xl w-full object-cover aspect-[4/5] shadow-inner"
                 />

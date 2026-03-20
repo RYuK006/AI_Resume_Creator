@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "abe98c73ec10ac20",
+        "id": "2c469fe3535da964",
         "type": "tabs",
         "children": [
           {
-            "id": "a5f81679693667d2",
+            "id": "bf7f5681adb15c1a",
             "type": "leaf",
             "state": {
               "type": "graph",
@@ -178,8 +178,17 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "a5f81679693667d2",
+  "active": "bf7f5681adb15c1a",
   "lastOpenFiles": [
+    "docs/00_Index.md",
+    "docs/07_Deployment.md",
+    "docs/06_API_Reference.md",
+    "docs/05_Pages_and_Components.md",
+    "docs/04_Design_System.md",
+    "docs/03_Architecture.md",
+    "docs/02_Setup_Guide.md",
+    "docs/01_Project_Overview.md",
+    "docs",
     "Demo_Input.md",
     "Complete_Project_Documentation.md",
     "Aaron_Demo_Input.md",

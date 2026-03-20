@@ -28,7 +28,7 @@ function buildResumeHTML(data: any): string {
   if (data.basics?.profiles) {
     contactParts.push(...data.basics.profiles);
   }
-  html += `<p style="text-align:center;color:#666;font-size:0.9rem;border-bottom:2px solid #0071e3;padding-bottom:8px;margin-bottom:12px;">${contactParts.join(" | ")}</p>`;
+  html += `<p style="text-align:center;color:#404752;font-size:0.9rem;border-bottom:2px solid #0061a4;padding-bottom:8px;margin-bottom:12px;">${contactParts.join(" | ")}</p>`;
 
   // Summary
   if (data.basics?.summary) {
@@ -51,7 +51,7 @@ function buildResumeHTML(data: any): string {
     html += `<h2>Technical Experience</h2>`;
     for (const job of data.work) {
       html += `<p style="margin-bottom:2px;"><strong>${job.company || ""}</strong> <span style="float:right;color:#777;font-style:italic;font-size:0.85rem;">${job.startDate || ""} – ${job.endDate || ""}</span></p>`;
-      html += `<p style="color:#0071e3;font-weight:600;margin-top:0;">${job.position || ""}</p>`;
+      html += `<p style="color:#0061a4;font-weight:600;margin-top:0;">${job.position || ""}</p>`;
       if (job.highlights && job.highlights.length > 0) {
         html += `<ul>${job.highlights.map((h: string) => `<li>${h}</li>`).join("")}</ul>`;
       }
@@ -77,7 +77,7 @@ function buildResumeHTML(data: any): string {
     html += `<h2>Education</h2>`;
     for (const edu of data.education) {
       html += `<p style="margin-bottom:2px;"><strong>${edu.institution || ""}</strong> <span style="float:right;color:#777;font-style:italic;font-size:0.85rem;">${edu.startDate || ""} – ${edu.endDate || ""}</span></p>`;
-      html += `<p style="margin-top:0;color:#0071e3;font-weight:600;">${edu.studyType || ""} in ${edu.area || ""}</p>`;
+      html += `<p style="margin-top:0;color:#0061a4;font-weight:600;">${edu.studyType || ""} in ${edu.area || ""}</p>`;
     }
   }
 
@@ -365,13 +365,13 @@ export default function ResumeEditor({ data, atsScore: initialAts, improvements:
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            className="w-full max-w-[960px] bg-white/95 rounded-xl shadow-md p-5 mb-4 backdrop-blur-md border border-gray-100"
+            className="w-full max-w-[960px] bg-surface-container-lowest/95 rounded-xl shadow-md p-5 mb-4 backdrop-blur-md border border-outline-variant/15"
           >
             <div className="flex justify-between items-center mb-2">
-              <span className="font-bold text-[#1d1d1f] text-sm">ATS Score ({template.charAt(0).toUpperCase() + template.slice(1)} Template)</span>
+              <span className="font-bold text-on-surface text-sm font-headline">ATS Score ({template.charAt(0).toUpperCase() + template.slice(1)} Template)</span>
               <span className="font-extrabold text-2xl" style={{ color: getAtsColor(overallScore) }}>{overallScore}/100</span>
             </div>
-            <div className="w-full h-5 bg-gray-200 rounded-full overflow-hidden relative">
+            <div className="w-full h-5 bg-surface-container-high rounded-full overflow-hidden relative">
               <motion.div 
                 initial={{ width: 0 }}
                 animate={{ width: `${overallScore}%` }}
@@ -384,16 +384,16 @@ export default function ResumeEditor({ data, atsScore: initialAts, improvements:
             </div>
             <div className="flex gap-6 mt-3 flex-wrap">
               <div className="flex flex-col items-center gap-1">
-                <span className="font-bold text-base text-[#1d1d1f]">{atsScore.keyword_match || 0}%</span>
-                <span className="text-xs text-gray-500">Keywords</span>
+                <span className="font-bold text-base text-on-surface">{atsScore.keyword_match || 0}%</span>
+                <span className="text-xs text-on-surface-variant">Keywords</span>
               </div>
               <div className="flex flex-col items-center gap-1">
-                <span className="font-bold text-base text-[#1d1d1f]">{atsScore.readability || 0}</span>
-                <span className="text-xs text-gray-500">Readability</span>
+                <span className="font-bold text-base text-on-surface">{atsScore.readability || 0}</span>
+                <span className="text-xs text-on-surface-variant">Readability</span>
               </div>
               <div className="flex flex-col items-center gap-1">
-                <span className="font-bold text-base text-[#1d1d1f]">{atsScore.formatting || 0}</span>
-                <span className="text-xs text-gray-500">Formatting</span>
+                <span className="font-bold text-base text-on-surface">{atsScore.formatting || 0}</span>
+                <span className="text-xs text-on-surface-variant">Formatting</span>
               </div>
             </div>
           </motion.div>
@@ -439,10 +439,10 @@ export default function ResumeEditor({ data, atsScore: initialAts, improvements:
             exit={{ opacity: 0, height: 0 }}
             className="w-full max-w-[960px] overflow-hidden"
           >
-            <div className="bg-white/95 rounded-xl shadow-md p-5 mb-4 backdrop-blur-md border border-gray-100">
-              <div className="font-bold text-[#1d1d1f] text-lg mb-3">🎯 Apply for this Job</div>
+            <div className="bg-surface-container-lowest/95 rounded-xl shadow-md p-5 mb-4 backdrop-blur-md border border-outline-variant/15">
+              <div className="font-bold text-on-surface text-lg mb-3 font-headline">🎯 Apply for this Job</div>
               <textarea 
-                className="w-full min-h-[100px] p-3 border border-gray-300 rounded-lg text-sm mb-3 focus:outline-none focus:border-[#0071e3] focus:ring-1 focus:ring-[#0071e3] resize-y" 
+                className="w-full min-h-[100px] p-3 border border-outline-variant/30 rounded-lg text-sm mb-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary resize-y bg-surface-container-lowest" 
                 placeholder="Paste the full job description here..." 
                 value={jobDescription} 
                 onChange={(e) => setJobDescription(e.target.value)} 
@@ -501,8 +501,8 @@ export default function ResumeEditor({ data, atsScore: initialAts, improvements:
       <div className="w-full max-w-[960px] grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
         
         {atsScore?.missing_keywords?.length > 0 && (
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-white/95 rounded-xl shadow p-5 border border-gray-100">
-            <div className="font-bold text-[#1d1d1f] mb-3">🔑 Missing Keywords <span className="text-xs text-gray-500 font-normal">(click to add)</span></div>
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-surface-container-lowest/95 rounded-xl shadow p-5 border border-outline-variant/15">
+            <div className="font-bold text-on-surface mb-3 font-headline">🔑 Missing Keywords <span className="text-xs text-on-surface-variant font-normal">(click to add)</span></div>
             <div className="flex flex-wrap gap-2">
               {atsScore.missing_keywords.map((kw: string, i: number) => (
                 <motion.span whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} key={i} className={styles.keywordChip} onClick={() => addKeywordToResume(kw)}>+ {kw}</motion.span>
@@ -512,8 +512,8 @@ export default function ResumeEditor({ data, atsScore: initialAts, improvements:
         )}
 
         {atsScore?.weak_bullets?.length > 0 && (
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-white/95 rounded-xl shadow p-5 border border-gray-100">
-            <div className="font-bold text-[#1d1d1f] mb-3">⚠️ Weak Bullet Points</div>
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-surface-container-lowest/95 rounded-xl shadow p-5 border border-outline-variant/15">
+            <div className="font-bold text-on-surface mb-3 font-headline">⚠️ Weak Bullet Points</div>
             {atsScore.weak_bullets.map((wb: string, i: number) => (
               <div key={i} className={styles.weakBullet}>{wb}</div>
             ))}
@@ -521,8 +521,8 @@ export default function ResumeEditor({ data, atsScore: initialAts, improvements:
         )}
 
         {atsScore?.sections_to_improve?.length > 0 && (
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-white/95 rounded-xl shadow p-5 border border-gray-100">
-            <div className="font-bold text-[#1d1d1f] mb-3">📋 Sections to Improve <span className="text-xs text-gray-500 font-normal">(click to add)</span></div>
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-surface-container-lowest/95 rounded-xl shadow p-5 border border-outline-variant/15">
+            <div className="font-bold text-on-surface mb-3 font-headline">📋 Sections to Improve <span className="text-xs text-on-surface-variant font-normal">(click to add)</span></div>
             {atsScore.sections_to_improve.map((s: string, i: number) => (
               <motion.div whileHover={{ x: 4 }} key={i} className={styles.suggestionItem} onClick={() => applySuggestion(s)}>
                 <span>{s}</span>
@@ -533,8 +533,8 @@ export default function ResumeEditor({ data, atsScore: initialAts, improvements:
         )}
 
         {suggestions?.length > 0 && (
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-white/95 rounded-xl shadow p-5 border border-gray-100">
-            <div className="font-bold text-[#1d1d1f] mb-3">💡 Smart Suggestions <span className="text-xs text-gray-500 font-normal">(click to add)</span></div>
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-surface-container-lowest/95 rounded-xl shadow p-5 border border-outline-variant/15">
+            <div className="font-bold text-on-surface mb-3 font-headline">💡 Smart Suggestions <span className="text-xs text-on-surface-variant font-normal">(click to add)</span></div>
             {suggestions.map((s: string, i: number) => (
               <motion.div whileHover={{ x: 4 }} key={i} className={styles.suggestionItem} onClick={() => applySuggestion(s)}>
                 <span>→ {s}</span>
@@ -546,8 +546,8 @@ export default function ResumeEditor({ data, atsScore: initialAts, improvements:
       </div>
 
       {improvements?.length > 0 && (
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-[960px] bg-white/95 rounded-xl shadow p-5 border border-gray-100 mt-4">
-          <div className="font-bold text-[#1d1d1f] mb-3">🔧 AI Improvements <span className="text-xs text-gray-500 font-normal">(click to apply)</span></div>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-[960px] bg-surface-container-lowest/95 rounded-xl shadow p-5 border border-outline-variant/15 mt-4">
+          <div className="font-bold text-on-surface mb-3 font-headline">🔧 AI Improvements <span className="text-xs text-on-surface-variant font-normal">(click to apply)</span></div>
           {improvements.map((imp: any, i: number) => (
             <motion.div whileHover={{ scale: 1.01, x: 4 }} key={i} className={styles.improvementItem} onClick={() => applyImprovement(imp)}>
               <div className={styles.improvementOriginal}>❌ {imp.original}</div>
