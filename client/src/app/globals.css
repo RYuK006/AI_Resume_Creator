@@ -1,36 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --color-white: #ffffff;
-  --color-navy: #0f172a;
-  --color-blue: #2563eb;
-  --color-cyan: #38bdf8;
-  --color-bg: #ffffff;
-  --color-text: #1e293b;
-  --color-accent: #2563eb;
-  --color-gray: #64748b;
+  /* Etheric Ledger – Surface Architecture */
+  --surface: #f7f9fb;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f2f4f6;
+  --surface-container: #eceef0;
+  --surface-container-high: #e6e8ea;
   
-  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  /* Primary Palette */
+  --primary: #0061a4;
+  --primary-container: #2196f3;
+  --primary-fixed-dim: #9ecaff;
+  --on-primary: #ffffff;
+  
+  /* Semantic Text */
+  --on-surface: #191c1e;
+  --on-surface-variant: #404752;
+  --outline: #707883;
+  --outline-variant: #bfc7d4;
+  
+  /* Accent / Tertiary */
+  --tertiary: #904d00;
+  --tertiary-container: #db7900;
+  
+  /* Typography */
+  --font-headline: 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
+
+html { scroll-behavior: smooth; }
 
 html, body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  font-family: var(--font-primary);
-  color: var(--color-text);
-  background-color: var(--color-bg);
+  font-family: var(--font-body);
+  color: var(--on-surface);
+  background-color: var(--surface);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--on-primary);
 }
