@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface IconProps {
   name: string;
@@ -13,7 +14,16 @@ const Icon = ({ name, className = "", fill }: IconProps) => (
 );
 
 export default function PortfolioView({ data }: { data: any }) {
+  const [showCode, setShowCode] = useState(false);
+  const [copied, setCopied] = useState(false);
+
   if (!data) return null;
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(data.htmlTemplate || '');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
     <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -22,9 +32,18 @@ export default function PortfolioView({ data }: { data: any }) {
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/20 to-transparent pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row items-center gap-10">
           <div className="flex-1 text-center md:text-left">
-            <span className="px-4 py-1.5 bg-primary/20 text-primary-fixed-dim rounded-full text-[10px] font-black uppercase tracking-[0.3em] mb-6 inline-block border border-white/10">
-              Personal Brand Blueprint
-            </span>
+            <div className="flex justify-between items-start mb-6">
+              <span className="px-4 py-1.5 bg-primary/20 text-primary-fixed-dim rounded-full text-[10px] font-black uppercase tracking-[0.3em] inline-block border border-white/10">
+                Personal Brand Blueprint
+              </span>
+              <button 
+                onClick={() => setShowCode(true)}
+                className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-2xl border border-white/10 transition-all text-xs font-bold group"
+              >
+                <Icon name="code" className="text-sm group-hover:rotate-12 transition-transform" />
+                Extract Code
+              </button>
+            </div>
             <h3 className="text-4xl md:text-5xl font-black mb-6 tracking-tighter leading-[1.1]">
               {data.tagline}
             </h3>
@@ -108,6 +127,53 @@ export default function PortfolioView({ data }: { data: any }) {
           </div>
         </div>
       </div>
+
+      <AnimatePresence>
+        {showCode && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-12">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowCode(false)}
+              className="absolute inset-0 bg-slate-950/80 backdrop-blur-xl"
+            />
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative w-full max-w-4xl h-[80vh] bg-white rounded-[48px] shadow-2xl overflow-hidden flex flex-col border border-gray-100"
+            >
+              <div className="p-8 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+                <div>
+                  <h3 className="text-2xl font-black text-gray-900 tracking-tight">Source Code</h3>
+                  <p className="text-xs text-gray-500 font-bold uppercase tracking-widest mt-1">Ready-to-use HTML/Tailwind Template</p>
+                </div>
+                <div className="flex gap-3">
+                  <button 
+                    onClick={handleCopy}
+                    className="flex items-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl font-black text-xs transition-all shadow-lg shadow-indigo-200"
+                  >
+                    <Icon name={copied ? "check" : "content_copy"} className="text-sm" />
+                    {copied ? "Copied!" : "Copy Code"}
+                  </button>
+                  <button 
+                    onClick={() => setShowCode(false)}
+                    className="w-10 h-10 flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-gray-500 rounded-xl transition-colors"
+                  >
+                    <Icon name="close" />
+                  </button>
+                </div>
+              </div>
+              <div className="flex-1 overflow-auto p-8 bg-slate-950">
+                <pre className="text-xs md:text-sm font-mono text-emerald-400 leading-relaxed">
+                  {data.htmlTemplate}
+                </pre>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
