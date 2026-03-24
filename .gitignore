@@ -1,0 +1,11 @@
+node_modules
+.next
+dist
+build
+.DS_Store
+.env*
+*.log
+video_promo/node_modules
+video_promo/dist
+client/node_modules
+client/.next

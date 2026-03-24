@@ -1,0 +1,24 @@
+{
+  "name": "luminance-ai-promo",
+  "version": "1.0.0",
+  "description": "Luminance AI Promotional Video",
+  "scripts": {
+    "start": "remotion preview src/Root.tsx",
+    "build": "remotion render src/Root.tsx MyVideo out/video.mp4"
+  },
+  "dependencies": {
+    "remotion": "4.0.0",
+    "@remotion/cli": "4.0.0",
+    "@remotion/renderer": "4.0.0",
+    "@remotion/tailwind": "4.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "lucide-react": "^0.263.1",
+    "framer-motion": "^10.12.16"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^5.0.0"
+  }
+}

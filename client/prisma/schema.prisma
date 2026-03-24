@@ -68,8 +68,46 @@ model Resume {
   experiences    String?
   projects       String?
   
-  // Generated AI Output
+  // Generated AI Output (Current active version)
   aiDraftContent String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // New Relations
+  versions    ResumeVersion[]
+  assessments Assessment[]
+  abTests     ABTest[]        @relation("PrimaryResume")
+  abVariants  ABTest[]        @relation("VariantResume")
+}
+
+model ResumeVersion {
+  id        String   @id @default(cuid())
+  resumeId  String
+  name      String?  // e.g. "Draft v1", "Post-FAANG Rewrite"
+  content   String   // JSON string of the resume object
+  createdAt DateTime @default(now())
+  
+  resume    Resume   @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+}
+
+model Assessment {
+  id        String   @id @default(cuid())
+  resumeId  String
+  type      String   // RECRUITER, SKILL_GAP, HEATMAP, INTERVIEW_PREP, LINKEDIN
+  data      String   // JSON string of the assessment results
+  createdAt DateTime @default(now())
+  
+  resume    Resume   @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+}
+
+model ABTest {
+  id              String   @id @default(cuid())
+  primaryResumeId String
+  variantResumeId String
+  status          String   @default("ACTIVE") // ACTIVE, COMPLETED
+  metrics         String?  // JSON of comparison results
+  createdAt       DateTime @default(now())
+
+  primary   Resume   @relation("PrimaryResume", fields: [primaryResumeId], references: [id], onDelete: Cascade)
+  variant   Resume   @relation("VariantResume", fields: [variantResumeId], references: [id], onDelete: Cascade)
 }

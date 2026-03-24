@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import styles from "./dashboard.module.css";
+import ResumeUploadModal from "@/components/ResumeUploadModal";
 
 /* Material Symbols helper */
 const Icon = ({ name, fill, className = "" }: { name: string; fill?: boolean; className?: string }) => (
@@ -52,6 +53,9 @@ export default function Dashboard() {
   const [savedResumes, setSavedResumes] = useState<SavedResume[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState("home");
+  const [showResumeModal, setShowResumeModal] = useState(false);
+  const [activeFeature, setActiveFeature] = useState<string | null>(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Redirect to home if not authenticated
   useEffect(() => {
@@ -81,6 +85,44 @@ export default function Dashboard() {
     r.template.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const handleFeatureClick = (featureId: string) => {
+    setActiveFeature(featureId);
+    setShowResumeModal(true);
+  };
+
+  const [isParsing, setIsParsing] = useState(false);
+
+  const handleResumeSelect = async (resumeId: string | null, uploadFile?: File) => {
+    if (resumeId) {
+      router.push(`/form?id=${resumeId}&mode=${activeFeature}`);
+    } else if (uploadFile) {
+      setIsParsing(true);
+      try {
+        const formData = new FormData();
+        formData.append("file", uploadFile);
+        const res = await fetch("/api/parse", {
+          method: "POST",
+          body: formData
+        });
+        const data = await res.json();
+        if (data.success) {
+          sessionStorage.setItem('temp_resume_text', data.text);
+          router.push(`/form?mode=${activeFeature}&source=upload`);
+        } else {
+          alert("Failed to parse resume: " + data.error);
+          setIsParsing(false);
+          return; // Keep modal open on error
+        }
+      } catch (err) {
+        alert("Error parsing resume file.");
+        setIsParsing(false);
+        return;
+      }
+    }
+    setShowResumeModal(false);
+    setIsParsing(false);
+  };
+
   if (status === "loading") {
     return (
       <div className={styles.loadingScreen}>
@@ -96,7 +138,7 @@ export default function Dashboard() {
   return (
     <div className={styles.container}>
       {/* ═══ Sidebar ═══ */}
-      <aside className={styles.sidebar}>
+      <aside className={`${styles.sidebar} ${!isSidebarOpen ? styles.sidebarClosed : ""}`}>
         <div className={styles.sidebarBrand}>
           <Icon name="auto_awesome" fill className="text-primary" />
           <span className={styles.brandText}>Luminance AI</span>
@@ -113,7 +155,10 @@ export default function Dashboard() {
             <button
               key={item.id}
               className={`${styles.navItem} ${activeTab === item.id ? styles.navItemActive : ""}`}
-              onClick={() => setActiveTab(item.id)}
+              onClick={() => {
+                setActiveTab(item.id);
+                setIsSidebarOpen(false); // Close sidebar on mobile after selection
+              }}
             >
               <Icon name={item.icon} fill={activeTab === item.id} className="text-lg" /> {item.label}
             </button>
@@ -130,10 +175,25 @@ export default function Dashboard() {
         </div>
       </aside>
 
+      {/* Sidebar Overlay for Mobile */}
+      {isSidebarOpen && (
+        <div 
+          className={styles.sidebarOverlay} 
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
       {/* ═══ Main Content ═══ */}
       <main className={styles.main}>
         {/* Top Bar */}
         <header className={styles.topBar}>
+          <button 
+            className={styles.hamburger}
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          >
+            <Icon name={isSidebarOpen ? "close" : "menu"} />
+          </button>
+
           <div className={styles.searchBox}>
             <Icon name="search" className="text-xl text-on-surface-variant" />
             <input
@@ -221,6 +281,41 @@ export default function Dashboard() {
                       <Icon name="arrow_forward" className="text-xl ml-auto opacity-40" />
                     </button>
                   </motion.div>
+                </motion.section>
+
+                {/* ── AI Career Suite ── */}
+                <motion.section
+                  initial="hidden" animate="visible" variants={fadeUp}
+                  className={styles.section}
+                >
+                  <div className={styles.sectionHeader}>
+                    <h2 className={styles.sectionTitle}>
+                      <Icon name="auto_fix_high" className="text-xl text-primary" fill /> AI Career Suite
+                    </h2>
+                  </div>
+                  <div className={styles.careerSuiteGrid}>
+                    {[
+                      { id: "interview", name: "Interview Prep", desc: "AI behavioral simulation", icon: "record_voice_over", color: "#1a73e8", bg: "#e8f0fe" },
+                      { id: "linkedin", name: "LinkedIn Gen", desc: "SEO optimize profile", icon: "share", color: "#f9ab00", bg: "#fef7e0" },
+                      { id: "roadmap", name: "Career Roadmap", desc: "3-year growth path", icon: "alt_route", color: "#9333ea", bg: "#f3e8ff" },
+                      { id: "portfolio", name: "Portfolio Gen", desc: "Convert resume to site", icon: "web", color: "#1e8e3e", bg: "#e6f4ea" },
+                    ].map((item) => (
+                      <button
+                        key={item.id}
+                        className={styles.careerSuiteCard}
+                        onClick={() => handleFeatureClick(item.id)}
+                      >
+                        <div className={styles.careerSuiteIcon} style={{ backgroundColor: item.bg, color: item.color }}>
+                          <Icon name={item.icon} fill />
+                        </div>
+                        <div className="text-left">
+                          <p className={styles.careerSuiteTitle}>{item.name}</p>
+                          <p className={styles.careerSuiteDesc}>{item.desc}</p>
+                        </div>
+                        <Icon name="chevron_right" className="ml-auto text-on-surface-variant opacity-40" />
+                      </button>
+                    ))}
+                  </div>
                 </motion.section>
 
                 {/* ── Recent Resumes ── */}
@@ -429,6 +524,15 @@ export default function Dashboard() {
           </AnimatePresence>
         </div>
       </main>
+
+      <ResumeUploadModal 
+        isOpen={showResumeModal} 
+        onClose={() => setShowResumeModal(false)}
+        onSelect={handleResumeSelect}
+        existingResumes={savedResumes}
+        isLoading={isParsing}
+        activeFeature={activeFeature}
+      />
     </div>
   );
 }

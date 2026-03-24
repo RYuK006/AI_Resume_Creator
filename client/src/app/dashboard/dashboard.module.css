@@ -46,7 +46,8 @@
   top: 0;
   left: 0;
   bottom: 0;
-  z-index: 30;
+  z-index: 100;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .sidebarBrand {
@@ -175,8 +176,23 @@
   background: var(--color-surface-container-lowest);
   position: sticky;
   top: 0;
-  z-index: 20;
+  z-index: 80;
   backdrop-filter: blur(16px);
+  gap: 1rem;
+}
+
+.hamburger {
+  display: none;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: none;
+  background: var(--color-surface-container-low);
+  color: var(--color-on-surface);
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
 .searchBox {
@@ -702,16 +718,132 @@
   line-height: 1.5;
 }
 
+/* ── AI Career Suite ── */
+.careerSuiteGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 1400px) {
+  .careerSuiteGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .careerSuiteGrid { grid-template-columns: 1fr; }
+}
+
+.careerSuiteCard {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  border-radius: 24px;
+  background: var(--color-surface-container-lowest);
+  border: 1px solid rgba(191, 199, 212, 0.2);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  width: 100%;
+}
+
+.careerSuiteCard:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  border-color: var(--color-primary);
+  background: white;
+}
+
+.careerSuiteIcon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.careerSuiteCard:hover .careerSuiteIcon {
+  transform: rotate(-5deg);
+}
+
+.careerSuiteTitle {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--color-on-surface);
+  margin: 0;
+}
+
+.careerSuiteDesc {
+  font-size: 0.8rem;
+  color: var(--color-on-surface-variant);
+  margin: 0.1rem 0 0 0;
+  font-family: var(--font-body);
+  font-weight: 500;
+}
+
 /* ── Responsive ── */
 @media (max-width: 1024px) {
-  .sidebar { display: none; }
+  .sidebarClosed {
+    transform: translateX(-100%);
+  }
   .main { margin-left: 0; }
+  .topBar { padding: 1rem; }
+  .hamburger { display: flex; }
   .createCards { grid-template-columns: 1fr; }
   .tipsGrid { grid-template-columns: 1fr; }
+  
+  .sidebarOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 90;
+    opacity: 1;
+  }
 }
 
 @media (max-width: 768px) {
   .content { padding: 1.25rem; }
-  .searchBox { width: 200px; }
+  .searchBox { 
+    width: 100%; 
+    max-width: 40px; 
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  .searchBox:focus-within {
+    position: absolute;
+    left: 1rem;
+    right: 1rem;
+    max-width: none;
+    border-radius: 12px;
+    padding: 0.5rem 1rem;
+    background: white;
+    z-index: 101;
+  }
+  .searchInput {
+    display: none;
+  }
+  .searchBox:focus-within .searchInput {
+    display: block;
+  }
+
   .templateGrid { grid-template-columns: repeat(2, 1fr); }
+  .welcomeTitle { font-size: 1.5rem; }
+  
+  .tipsGrid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .templateGrid { grid-template-columns: 1fr; }
+  .careerSuiteCard { padding: 1rem; gap: 0.75rem; }
+  .careerSuiteIcon { width: 40px; height: 40px; font-size: 1.2rem; }
+  .careerSuiteTitle { font-size: 0.95rem; }
 }

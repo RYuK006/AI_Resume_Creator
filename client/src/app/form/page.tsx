@@ -132,16 +132,43 @@ function ResumeFormInner() {
   const [dragActive, setDragActive] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // ── Template preloading: if ?template=X, auto-load editor with sample data ──
+  // ── Template & Resume Loading ──
   useEffect(() => {
-    if (templateParam && !resumeData) {
+    const id = searchParams.get("id");
+    const source = searchParams.get("source");
+    
+    if (id && !resumeData) {
+      // Load existing resume from localStorage
+      try {
+        const saved = localStorage.getItem("luminance_resumes");
+        if (saved) {
+          const resumes = JSON.parse(saved);
+          const found = resumes.find((r: any) => r.id === id);
+          if (found) {
+            // In this demo, 'preview' stores a bit of text, but let's assume 
+            // the full data is stored or we use the example data for the ID
+            setResumeData(found.data || getExampleResume());
+            setInitialTemplate(found.template);
+          }
+        }
+      } catch (err) { console.error("Failed to load resume", err); }
+    } else if (source === "upload" && !resumeData) {
+      // Load uploaded text from sessionStorage
+      const text = sessionStorage.getItem("temp_resume_text");
+      if (text) {
+        // Simple initialization for uploaded text
+        const baseResume = getExampleResume();
+        baseResume.basics.summary = [text];
+        setResumeData(baseResume);
+      }
+    } else if (templateParam && !resumeData) {
       const validTemplates = ["modern", "minimal", "faang", "executive", "creative", "professional", "tech"];
       if (validTemplates.includes(templateParam)) {
         setResumeData(getExampleResume());
         setInitialTemplate(templateParam);
       }
     }
-  }, [templateParam, resumeData]);
+  }, [templateParam, searchParams, resumeData]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -205,6 +232,7 @@ function ResumeFormInner() {
         improvements={improvements}
         suggestions={suggestions}
         initialTemplate={initialTemplate || undefined}
+        mode={searchParams.get("mode") || undefined}
         onBack={() => { setResumeData(null); setAtsScore(null); setImprovements([]); setSuggestions([]); setInitialTemplate(null); }} 
       />
     );

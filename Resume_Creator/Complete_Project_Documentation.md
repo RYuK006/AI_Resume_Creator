@@ -232,9 +232,9 @@ DATABASE_URL=file:./dev.db
 
 ## Obsidian Knowledge Base
 All prompts, actions, bugs, and decisions are tracked in:
-- `Resume_Creator.md` — Index
-- `User_Prompts.md` — Every user request logged chronologically
-- `Agent_Actions.md` — Every agent action logged
-- `Phase4_AI_Uploads.md` — Phase 4 deep dive
-- `Demo_Input.md` — Generic test data
-- `Aaron_Demo_Input.md` — Aaron's personalized test data
+- [[Resume_Creator.md]] — Index
+- [[User_Prompts.md]] — Every user request logged chronologically
+- [[Agent_Actions.md]] — Every agent action logged
+- [[Phase4_AI_Uploads.md]] — Phase 4 deep dive
+- [[Demo_Input.md]] — Generic test data
+- [[Aaron_Demo_Input.md]] — Aaron's personalized test data

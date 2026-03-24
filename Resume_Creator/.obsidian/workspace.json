@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "2c469fe3535da964",
+        "id": "8513c13e551ef28d",
         "type": "tabs",
         "children": [
           {
-            "id": "bf7f5681adb15c1a",
+            "id": "9165ce51a28cb817",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "Complete_Project_Documentation.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Complete_Project_Documentation"
             }
           }
         ]
@@ -178,8 +182,14 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "bf7f5681adb15c1a",
+  "active": "9165ce51a28cb817",
   "lastOpenFiles": [
+    "Untitled",
+    "Untitled.md",
+    "FEATURE_DOCUMENTATION.md",
+    "Complete_Project_Documentation.md",
+    "docs/00_Index.md",
+    "Resume_Creator.md",
     "docs/Phases/Phase_18_Interactivity_Documentation.md",
     "docs/Phases/Phase_17_Pricing_Templates.md",
     "docs/Phases/Phase_16_Dashboard_Refinement.md",
@@ -199,14 +209,8 @@
     "docs/Phases/Phase_03_Form_Wizard.md",
     "docs/Phases/Phase_02_Authentication.md",
     "docs/Phases/Phase_01_Initialization.md",
-    "docs/00_Index.md",
     "docs/Phases",
     "docs/07_Deployment.md",
-    "docs/06_API_Reference.md",
-    "docs/05_Pages_and_Components.md",
-    "docs/04_Design_System.md",
-    "docs/02_Setup_Guide.md",
-    "docs/01_Project_Overview.md",
     "docs",
     "Untitled.canvas",
     "Untitled.base",
