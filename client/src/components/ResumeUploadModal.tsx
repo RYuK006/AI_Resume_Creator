@@ -153,11 +153,15 @@ export default function ResumeUploadModal({ isOpen, onClose, onSelect, existingR
   };
 
   const getHeader = () => {
-    if (step === "results") {
-      if (activeFeature === "interview") return { title: "Interview Readiness", sub: "Technical & Behavioral Preparation" };
-      if (activeFeature === "linkedin") return { title: "LinkedIn SEO Optimization", sub: "Headline & About Section Revamp" };
-      if (activeFeature === "portfolio") return { title: "Personal Website Blueprint", sub: "Convert Resume to Portfolio site" };
-      if (activeFeature === "roadmap") return { title: "Career Growth Roadmap", sub: "Strategic 3-Year Trajectory" };
+    const titles: Record<string, { title: string; sub: string }> = {
+      interview: { title: "Interview Readiness", sub: "Technical & Behavioral Preparation" },
+      linkedin: { title: "LinkedIn SEO Optimization", sub: "Headline & About Section Revamp" },
+      portfolio: { title: "Personal Website Blueprint", sub: "Convert Resume to Portfolio site" },
+      roadmap: { title: "Career Growth Roadmap", sub: "Strategic 3-Year Trajectory" },
+    };
+
+    if (activeFeature && titles[activeFeature]) {
+      return titles[activeFeature];
     }
     return { title: "Pick Your Context", sub: "Select a resume or upload a new one to begin." };
   };

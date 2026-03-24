@@ -726,7 +726,7 @@
   margin-top: 0.5rem;
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1024px) {
   .careerSuiteGrid { grid-template-columns: repeat(2, 1fr); }
 }
 
